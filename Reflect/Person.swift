@@ -11,13 +11,42 @@ import UIKit
 class Person: Reflect {
 
     var name: String
-    
     var age: Int
     
-    init(name: String, age: Int){
-        
-        self.name = name
-        self.age = age
+    var v1: String?
+    var v2: String!
+    var v3: Int?
+    var v4: Int!
+    var v5: Float
+    var v6: Double
+    var v7: NSNumber
+    var v8: UIImage
+    var v9: NSData
+    var v10: Bool
+    var v11: Bool?
+    var v12: Bool!
+    var v13: NSArray
+    var v14: [String]
+    var v15: [String]?
+    var v16: [String]!
+    var v17: [Person]
+    var v18: [Person]?
+    var v19: [Person]!
+    
+
+    
+    override init(){
+        name = ""
+        age = 0
+        v5 = 0
+        v6=0
+        v7=0
+        v8 = UIImage()
+        v9=NSData()
+        v10 = false
+        v13 = NSArray()
+        v14 = []
+        v17 = []
     }
 
     

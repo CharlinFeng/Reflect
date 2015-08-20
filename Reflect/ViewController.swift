@@ -9,7 +9,6 @@
 import UIKit
 
 
-
 class ViewController: UIViewController {
     
 
@@ -17,13 +16,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let person = Person(name: "张三", age: 28)
-        
-        
-        
+        let person = Person()
+
         person.properties { (name, type, value) -> Void in
             
-            println("\(name),\(type.typeName),\(value)")
+            println("\(name): \(type.typeClass),\(type.dispositionDesc)")
         }
         
     }

@@ -23,11 +23,9 @@ extension Reflect{
             
             let propertyNameString = mirror[i].0
             
-            let propertyValueInstaceType = mirror[i].1
+            let propertyValueInstaceMirrorType = mirror[i].1
             
-            let propertyValueInstace = propertyValueInstaceType.value
-            
-            each(name:propertyNameString , type: ReflectType(typeValue: propertyValueInstaceType), value: propertyValueInstace)
+            each(name:propertyNameString , type: ReflectType(propertyMirrorType: propertyValueInstaceMirrorType), value: propertyValueInstaceMirrorType.value)
         }
     }
     
