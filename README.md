@@ -135,7 +135,7 @@
 ===============
 归档已做了级联，使用同样简单,同时封装了Caches文件夹的操作，直接保存在Caches文件夹中
 
-归档：单个模型归档name可为空，数组不可为空,返回归档位置
+归档：单个模型归档name可为空，数组时name值不可为空,返回归档位置
 
     let path1 =  Book2.save(obj: book2, name: nil)
     let path2 =  Book3.save(obj: bookArr, name: "book3")
@@ -151,7 +151,7 @@
     Book1.delete(name: nil)
 
 
-附加功能之字符
+附加功能：归档字段忽略
 
     /**  归档字段忽略  */
     func ignoreCodingPropertiesForCoding() -> [String]? {
