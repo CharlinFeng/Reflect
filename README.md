@@ -20,6 +20,10 @@
 .Dict2Model 字典转模型<br/>
 .Model2Dict 模型转字典<br/>
 
+#### 提示
+注：框架中已为您准备了大量示例，你直接调用类方法即可，比如Person1.Convert,Studetn1.Parse(),Book1.Action()
+
+
 
 <br/><br/><br/>
 核心理论
