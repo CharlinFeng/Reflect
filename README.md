@@ -87,6 +87,20 @@
     price: 36.6
     }
 
+附加功能之解析过程的字段映射与字段忽略，子类只需重写此方法即可：
+
+    /**  字段映射  */
+    func mappingDict() -> [String: String]? {
+        return nil
+    }
+     
+     
+    /**  字段忽略  */
+    func ignorePropertiesForParse() -> [String]? {
+        return nil
+    }
+
+
 您还可以使用以下方法完成字符串向类的转变：
 
     let cls = ClassFromString("Reflect.Person")
@@ -136,6 +150,13 @@
 
     Book1.delete(name: nil)
 
+
+附加功能之字符
+
+    /**  归档字段忽略  */
+    func ignoreCodingPropertiesForCoding() -> [String]? {
+        return nil
+    }
 
 
 <br/><br/><br/>
