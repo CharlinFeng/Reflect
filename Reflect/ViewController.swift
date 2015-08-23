@@ -12,16 +12,10 @@ import UIKit
 class ViewController: UIViewController {
     
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let person = Person()
-
-        person.properties { (name, type, value) -> Void in
-            
-            println("\(name): \(type.typeClass),\(type.dispositionDesc)")
-        }
+        Book3.action()
         
     }
 

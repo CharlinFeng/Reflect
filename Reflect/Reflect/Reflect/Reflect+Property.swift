@@ -15,7 +15,7 @@ extension Reflect{
     var classNameString: String {return "\(self.dynamicType)"}
     
     /** 遍历成员属性：对象调用 */
-    func properties(each: (name: String, type: ReflectType, value: Any) -> Void){
+    func properties(property: (name: String, type: ReflectType, value: Any) -> Void){
 
         for (var i=0; i<mirror.count; i++){
             
@@ -25,9 +25,15 @@ extension Reflect{
             
             let propertyValueInstaceMirrorType = mirror[i].1
             
-            each(name:propertyNameString , type: ReflectType(propertyMirrorType: propertyValueInstaceMirrorType), value: propertyValueInstaceMirrorType.value)
+            property(name:propertyNameString , type: ReflectType(propertyMirrorType: propertyValueInstaceMirrorType), value: propertyValueInstaceMirrorType.value)
         }
     }
     
+    /**  静态方法调用  */
+    class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self().properties(property)}
+    
     
 }
+
+
+

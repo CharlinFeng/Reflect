@@ -29,13 +29,13 @@ class Person: Reflect {
     var v14: [String]
     var v15: [String]?
     var v16: [String]!
-    var v17: [Person]
+    var v17: [Person?]
     var v18: [Person]?
     var v19: [Person]!
     
 
     
-    override init(){
+    required init(){
         name = ""
         age = 0
         v5 = 0

@@ -20,7 +20,14 @@ extension Reflect: Printable{
         
         self.properties { (name, type, value) -> Void in
             
-            printStr += "\n\(name): \(value)"
+            if type.isArray {
+                
+                printStr += "\n\n['\(name)']: \(value)"
+                
+            }else{
+                
+                printStr += "\n\(name): \(value)"
+            }
         }
     
         printStr += "\n}"
@@ -28,4 +35,24 @@ extension Reflect: Printable{
         return printStr
     }
     
+}
+
+
+
+extension String{
+    
+    func contain(#subStr: String) -> Bool {return (self as NSString).rangeOfString(subStr).length > 0}
+    
+    func explode (separator: Character) -> [String] {
+        return split(self, isSeparator: { (element: Character) -> Bool in
+            return element == separator
+        })
+    }
+    
+    func replacingOccurrencesOfString(target: String, withString: String) -> String{
+        return (self as NSString).stringByReplacingOccurrencesOfString(target, withString: withString)
+    }
+    
+    var floatValue: Float? {return NSNumberFormatter().numberFromString(self)?.floatValue}
+    var doubleValue: Double? {return NSNumberFormatter().numberFromString(self)?.doubleValue}
 }
