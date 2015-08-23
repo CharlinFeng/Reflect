@@ -30,13 +30,16 @@ class Book2: Reflect {
         book2.writter = writter
         
 //        Book2.save(obj: book2, name: nil)
+        let res = Book2.read(name: nil)
         
-        let arcBook2 = Book2.read(name: nil)
-        
-        println(arcBook2)
+        println(res)
         
     }
     
+    
+    override func ignoreCodingPropertiesForCoding() -> [String]? {
+        return ["price"]
+    }
 }
 
 

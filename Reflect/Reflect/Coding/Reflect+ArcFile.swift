@@ -54,5 +54,10 @@ extension Reflect{
         static var cachesFolder: String? {return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last as? String}
         
     }
+    
+    /**  归档字段忽略  */
+    func ignoreCodingPropertiesForCoding() -> [String]? {
+        return nil
+    }
 
 }

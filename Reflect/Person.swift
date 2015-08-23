@@ -49,5 +49,16 @@ class Person: Reflect {
         v17 = []
     }
 
+    class func action(){
+        
+        self.properties { (name, type, value) -> Void in
+            println("\(name),\(type),\(value)")
+        }
+        
+        Person.properties { (name, type, _) -> Void in
+            println("\(name),\(type)")
+        }
+       
+    }
     
 }

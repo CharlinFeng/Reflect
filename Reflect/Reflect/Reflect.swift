@@ -18,18 +18,48 @@ class Reflect: NSObject, NSCoding{
         
         self.init()
         
+        let ignorePropertiesForCoding = self.ignoreCodingPropertiesForCoding()
+        
         self.properties { (name, type, value) -> Void in
              assert(type.check(), "[Charlin Feng]: Property '\(name)' type can not be a '\(type.realType.rawValue)' Type,Please use 'NSNumber' instead!")
-            self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
+            
+            let hasValue = ignorePropertiesForCoding != nil
+
+            if hasValue {
+                
+                let ignore = contains(ignorePropertiesForCoding!, name)
+                
+                if !ignore {
+                
+                    self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
+                }
+            }else{
+                self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
+            }
         }
         
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
         
+        let ignorePropertiesForCoding = self.ignoreCodingPropertiesForCoding()
+        
         self.properties { (name, type, value) -> Void in
             
-            aCoder.encodeObject(value as? AnyObject, forKey: name)
+            let hasValue = ignorePropertiesForCoding != nil
+            
+            if hasValue {
+                
+                let ignore = contains(ignorePropertiesForCoding!, name)
+                
+                if !ignore {
+                    
+                    aCoder.encodeObject(value as? AnyObject, forKey: name)
+                }
+            }else{
+                aCoder.encodeObject(value as? AnyObject, forKey: name)
+            }
+            
         }
         
     }
@@ -37,35 +67,5 @@ class Reflect: NSObject, NSCoding{
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-extension Reflect{
-    
-    /**  字段映射  */
-    func mappingDict() -> [String: String]? {
-        return nil
-    }
-    
-    /**  字段忽略  */
-    func ignoreProperties() -> [String]? {
-        return nil
-    }
-
-}
 
 

@@ -48,7 +48,7 @@ extension Reflect{
         
         let mappingDict = model.mappingDict()
         
-        let ignoreProperties = model.ignoreProperties()
+        let ignoreProperties = model.ignorePropertiesForParse()
 
         model.properties { (name, type, value) -> Void in
             
@@ -144,6 +144,16 @@ extension Reflect{
         return intArrM
     }
     
+    
+    /**  字段映射  */
+    func mappingDict() -> [String: String]? {
+        return nil
+    }
+    
+    /**  字段忽略  */
+    func ignorePropertiesForParse() -> [String]? {
+        return nil
+    }
     
 }
 

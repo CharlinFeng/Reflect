@@ -35,7 +35,7 @@ class Student4: Reflect {
         return ["hostID": "id", "funcType": "func"]
     }
     
-    override func ignoreProperties() -> [String]? {
+    override func ignorePropertiesForParse() -> [String]? {
         return ["funcType"]
     }
     
