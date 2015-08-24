@@ -122,8 +122,16 @@
         let stu1 = Student1.parse(dict: Student1Dict)
         let stus = Student7.parses(arr: Student7DictArr)
 
+如果你属性为Bool，你可能会遇到UndefinedKey，这是因为swift自身的原因，你只需实现以下方法手动解析：
+
+    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
+        self.isVip = (value as! Int) != 0
+    }
 
 
+解析Plist文件，请不要带后缀：
+
+        let author = Author.parsePlist("Author")
 
 
 <br/><br/><br/>
@@ -169,3 +177,8 @@
 西成的事业，渺小而艰难的求生存。前期我们专做全国的移动app外包。如果您能在信息上援助我们，我们万分感谢您的帮助！<br/>
 西成：http://ios-android.cn <br/>
 我的个人微博：http://weibo.com/charlin2015/<br/>
+
+三群： 474377358
+四群： 347446259
+西部省市朋友加群号： 473185026（实名）
+swift群： 467237044
