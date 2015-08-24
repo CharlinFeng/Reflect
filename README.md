@@ -63,14 +63,14 @@
         }
 
 其中name是您的模型的属性名，type是封装的ReflectType数据类型，value是变量的值，
-重度使用者请详细参考ReflectType的封装，您可以详细的知道每个属性是什么情况，如：
+重度使用者请详细参考ReflectType的封装，您可以详细的知道每个属性是什么情况，如：<br/><br/>
 
-.具体的数据类型
-.是否是基本数据类型
-.是否为数组
-.是否为Optional
-.是否为OC过来的对象
-.是否为自定义的Class类
+.具体的数据类型<br/>
+.是否是基本数据类型<br/>
+.是否为数组<br/>
+.是否为Optional<br/>
+.是否为OC过来的对象<br/>
+.是否为自定义的Class类<br/><br/>
 
     var typeName: String!
     
