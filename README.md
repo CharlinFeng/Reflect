@@ -52,7 +52,7 @@
 ===============
 直接调用对象的properties即可枚举反射您的对象
 
-        self.properties { (name, type, value) -> Void in
+        p1.properties { (name, type, value) -> Void in
             println("\(name),\(type),\(value)")
         }
 
