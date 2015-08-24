@@ -22,7 +22,7 @@
             </objects>
             <point key="canvasLocation" x="-216" y="315"/>
         </scene>
-        <!--冯成林原创.累了-->
+        <!--中国成都冯成林原创-->
         <scene sceneID="TcP-bA-DMb">
             <objects>
                 <viewController id="kF5-wd-cld" customClass="ViewController" customModule="Reflect" customModuleProvider="target" sceneMemberID="viewController">
@@ -34,13 +34,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift 反射与模型字典互转  孤军奋战 框架，我还能写几个？ 独自一人伤《莫尼山》" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHo-GS-oVg">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swift 反射与模型字典互转及一键归档 " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHo-GS-oVg">
                                 <rect key="frame" x="20" y="84" width="560" height="280"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="0.6124935775" blue="0.53462065716578933" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="aHo-GS-oVg" secondAttribute="height" multiplier="2:1" id="GJZ-m1-tjw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -52,7 +52,7 @@
                             <constraint firstAttribute="trailing" secondItem="aHo-GS-oVg" secondAttribute="trailing" constant="20" id="dof-LG-iEN"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="冯成林原创.累了" id="Zz1-FL-cuY"/>
+                    <navigationItem key="navigationItem" title="中国成都冯成林原创" id="Zz1-FL-cuY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMQ-4G-zK0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
