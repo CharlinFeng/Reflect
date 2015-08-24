@@ -103,14 +103,16 @@
 附加功能之解析过程的字段映射与字段忽略，子类只需重写此方法即可：
 
     /**  字段映射  */
+    //使用模型的userModel属性去解析并接受字典中的user_model键值对
     func mappingDict() -> [String: String]? {
-        return nil
+        return ["userModel":"user_model"]
     }
      
      
     /**  字段忽略  */
+    //忽略并且不解析模型的info属性
     func ignorePropertiesForParse() -> [String]? {
-        return nil
+        return ["info"]
     }
 
 
@@ -175,8 +177,9 @@
 附加功能：归档字段忽略
 
     /**  归档字段忽略  */
+    //不归档模型中的icon字段
     func ignoreCodingPropertiesForCoding() -> [String]? {
-        return nil
+        return ["icon"]
     }
 
 
