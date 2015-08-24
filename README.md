@@ -30,7 +30,11 @@
 .Model2Dict 模型转字典<br/>
 
 #### 提示
-注：框架中已为您准备了大量懒人式示例，并且简单到你直接调用类方法即可查看效果，比如Person1.Convert(),Studetn1.Parse(),Book1.Action()
+注：框架中已为您准备了大量懒人式示例，并且简单到你直接调用类方法即可查看效果，<br/>
+1.Parse-Parse8为字典转模型解析系列。<br/>
+2.Convert1-Convert4为模型转字典系列。<br/>
+3.Archiver1-Archiver3为归档系列。<br/>
+使用方法如Person1.Convert(),Studetn1.Parse(),Book1.Action()。
 
 
 
