@@ -7,7 +7,7 @@
 ### 版本信息
 .Swift 1.2<br/>
 .Xcode 6.3<br/>
-.基于Mit开源协议
+.基于MIT开源协议
 
 
 <br/><br/><br/>
@@ -119,8 +119,8 @@
 ===============
 字典转模型非常简单，已做各种级联，这里不再赘述细节了：
 
-        let stu1 = Student1.parse(dict: Student1Dict)
-        let stus = Student7.parses(arr: Student7DictArr)
+    let stu1 = Student1.parse(dict: Student1Dict)
+    let stus = Student7.parses(arr: Student7DictArr)
 
 如果你属性为Bool，你可能会遇到UndefinedKey，这是因为swift自身的原因，你只需实现以下方法手动解析：
 
@@ -131,7 +131,7 @@
 
 解析Plist文件，请不要带后缀：
 
-        let author = Author.parsePlist("Author")
+    let author = Author.parsePlist("Author")
 
 
 <br/><br/><br/>
@@ -139,7 +139,7 @@
 ===============
 模型转字典也非常简单，已做各种级联，这里不再赘述细节了：
 
-      let dict = person3.toDict()
+    let dict = person3.toDict()
 
 
 <br/><br/><br/>
@@ -177,8 +177,8 @@
 西成的事业，渺小而艰难的求生存。前期我们专做全国的移动app外包。如果您能在信息上援助我们，我们万分感谢您的帮助！<br/>
 西成：http://ios-android.cn <br/>
 我的个人微博：http://weibo.com/charlin2015/<br/>
-
-三群： 474377358
-四群： 347446259
-西部省市朋友加群号： 473185026（实名）
-swift群： 467237044
+<br/><br/>
+三群： 474377358<br/>
+四群： 347446259<br/>
+西部省市朋友加群号： 473185026（实名）<br/>
+swift群： 467237044<br/>
