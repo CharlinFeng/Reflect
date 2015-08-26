@@ -16,8 +16,9 @@
 ### 版本信息
 .Swift 1.2<br/>
 .Xcode 6.3<br/>
-.基于MIT开源协议
-
+.基于MIT开源协议<br/>
+<br/>
+##### 感谢小饭的翻译 [English](https://github.com/nsdictionary/Reflect)
 
 <br/><br/><br/>
 导入框架
