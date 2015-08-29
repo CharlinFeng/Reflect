@@ -19,15 +19,15 @@ func ClassFromString(var str: String) -> AnyClass!{
     
     if  var appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as? String {
         
-        if appName == "" {appName = (split(NSBundle.mainBundle().bundleIdentifier!){$0 == "."}).last ?? ""}
+        if appName == "" {appName = (NSBundle.mainBundle().bundleIdentifier!.explode(".")).last ?? ""}
         
-        if !str.contain(subStr: "\(appName).") { println("您传的字符串格式不正确，请包含命名空间。");return nil}
+        if !str.contain("\(appName).") { print("您传的字符串格式不正确，请包含命名空间。");return nil}
 
         let strArr = str.explode(".")
         
         var className = ""
         
-        let num = count(strArr)
+        let num = strArr.count
         
         if num <= 2 {
             
@@ -38,16 +38,15 @@ func ClassFromString(var str: String) -> AnyClass!{
             var nameStringM = "_TtCC"
             
             /** 数组遍历 */
-            for (index: Int, str: String) in enumerate(strArr){
-                
-                nameStringM += "\(count(str))\(str)"
+            for str in strArr {
+                nameStringM += "\(str.characters.count)\(str)"
             }
             
             className = nameStringM
 
         }else{
             
-            println("命名空间层次过深，暂不支持")
+            print("命名空间层次过深，暂不支持")
             return nil
         }
         

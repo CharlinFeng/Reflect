@@ -28,7 +28,7 @@ class Person4: Reflect {
         
         let dict = person4.toDict()
         
-        println(dict)
+        print(dict)
     }
     
 }

@@ -30,7 +30,7 @@ extension Reflect{
     }
     
     /**  静态方法调用  */
-    class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self().properties(property)}
+    class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self.init().properties(property)}
     
     
 }

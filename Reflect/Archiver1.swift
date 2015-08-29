@@ -30,8 +30,8 @@ class Book1: Reflect {
         
         let book1 = Book1(name: "tvb", price: 36.6)
 
-        Book1.delete(name: nil)
-        println(book1)
+        Book1.delete(nil)
+        print(book1)
         
     }
     

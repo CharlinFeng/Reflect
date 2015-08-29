@@ -36,7 +36,7 @@ class Student7: Reflect {
         let stus = Student7.parses(arr: Student7DictArr)
     
         for stu in stus {
-            println(stu)
+            print(stu)
         }
     }
 }

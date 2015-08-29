@@ -25,6 +25,6 @@ class Student6: Reflect {
         
         let stu6 = Student6.parse(dict: Student6Dict)
         
-        println(stu6)
+        print(stu6)
     }
 }

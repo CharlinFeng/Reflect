@@ -27,11 +27,11 @@ extension Reflect{
         return parse(dict: dict!)
     }
     
-    class func parses(#arr: NSArray) -> [Reflect]{
+    class func parses(arr arr: NSArray) -> [Reflect]{
         
         var models: [Reflect] = []
         
-        for (index, dict) in enumerate(arr){
+        for (_, dict) in arr.enumerate(){
             
             let model = self.parse(dict: dict as! NSDictionary)
             
@@ -42,9 +42,9 @@ extension Reflect{
     }
     
     
-    class func parse(#dict: NSDictionary) -> Self{
+    class func parse(dict dict: NSDictionary) -> Self{
         
-        let model = self()
+        let model = self.init()
         
         let mappingDict = model.mappingDict()
         
@@ -56,7 +56,7 @@ extension Reflect{
             
             let dataDictHasKey = dict[name] != nil
             let mappdictDictHasKey = mappingDict?[name] != nil
-            let needIgnore = ignoreProperties == nil ? false : contains(ignoreProperties!, name)
+            let needIgnore = ignoreProperties == nil ? false : ignoreProperties!.contains(name)
             
             if (dataDictHasKey || mappdictDictHasKey) && !needIgnore {
 
@@ -65,7 +65,7 @@ extension Reflect{
                 
                 if !type.isArray { //不是数组
                     
-                    if type.disposition != MirrorDisposition.Class { // 基本属性：String,Int,Float,Double,Bool
+                    if type.disposition != _MirrorDisposition.Class { // 基本属性：String,Int,Float,Double,Bool
                         
                         model.setValue(dict[key], forKeyPath: name)
                         
@@ -99,7 +99,7 @@ extension Reflect{
                         
                         var arrM: [Reflect] = []
                         
-                        for (key, value) in enumerate(dictKeyArr) {
+                        for (key, value) in dictKeyArr.enumerate() {
                             
                             let elementModel = elementModelType.parse(dict: value as! NSDictionary)
                             
@@ -122,13 +122,13 @@ extension Reflect{
         
         var intArrM: [T] = []
         
-        for (key, value) in enumerate(arrDict) {
+        for (key, value) in arrDict.enumerate() {
             
             var element: T = temp
             
             if value is String {
             
-                if temp is Int {element = (value as! String).toInt() as! T}
+                if temp is Int {element = Int(value as! String) as! T}
                 if temp is Float {element = (value as! String).floatValue as! T}
                 if temp is Double {element = (value as! String).doubleValue as! T}
                 element = value as! T

@@ -30,11 +30,11 @@ class Student3: Reflect {
         
         let stu3 = Student3.parse(dict: Student3Dict)
 
-        println(stu3.score.count)
+        print(stu3.score.count)
         
-        for (index,score) in enumerate(stu3.score) {
+        for (index,score) in stu3.score.enumerate() {
             
-            println(score)
+            print(score)
         }
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 
 /** 仿OC打印 */
-extension Reflect: Printable{
+extension Reflect {
     
     override var description: String {
     
@@ -41,12 +41,10 @@ extension Reflect: Printable{
 
 extension String{
     
-    func contain(#subStr: String) -> Bool {return (self as NSString).rangeOfString(subStr).length > 0}
+    func contain(subStr: String) -> Bool {return (self as NSString).rangeOfString(subStr).length > 0}
     
-    func explode (separator: Character) -> [String] {
-        return split(self, isSeparator: { (element: Character) -> Bool in
-            return element == separator
-        })
+    func explode (separator: String) -> [String] {
+        return self.componentsSeparatedByString(separator)
     }
     
     func replacingOccurrencesOfString(target: String, withString: String) -> String{
