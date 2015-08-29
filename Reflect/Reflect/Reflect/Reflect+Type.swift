@@ -15,7 +15,7 @@ class ReflectType {
     /**  系统解析出的Type  */
     var typeClass: Any.Type!
     
-    var disposition: MirrorDisposition!
+    var disposition: _MirrorDisposition!
     
     var dispositionDesc: String!
     
@@ -29,9 +29,9 @@ class ReflectType {
     var realType: RealType = .None
     
     
-    private var propertyMirrorType: MirrorType
+    private var propertyMirrorType: _MirrorType
 
-    init(propertyMirrorType: MirrorType){
+    init(propertyMirrorType: _MirrorType){
         
         self.propertyMirrorType = propertyMirrorType
         
@@ -130,14 +130,14 @@ extension ReflectType{
     /**  获取真实类型  */
     func fetchRealType(){
         
-        if typeName.contain(subStr: "Array") {isArray = true}
+        if typeName.contain("Array") {isArray = true}
 
-        if typeName.contain(subStr: "Int") {realType = RealType.Int}
-        else if typeName.contain(subStr: "Float") {realType = RealType.Float}
-        else if typeName.contain(subStr: "Double") {realType = RealType.Double}
-        else if typeName.contain(subStr: "String") {realType = RealType.String}
-        else if typeName.contain(subStr: "Bool") {realType = RealType.Bool}
-        else if disposition == MirrorDisposition.ObjCObject {realType = RealType.ObjCObject}
+        if typeName.contain("Int") {realType = RealType.Int}
+        else if typeName.contain("Float") {realType = RealType.Float}
+        else if typeName.contain("Double") {realType = RealType.Double}
+        else if typeName.contain("String") {realType = RealType.String}
+        else if typeName.contain("Bool") {realType = RealType.Bool}
+        else if disposition == _MirrorDisposition.ObjCObject {realType = RealType.ObjCObject}
         else {realType = RealType.Class}
         
         
@@ -160,7 +160,7 @@ extension ReflectType{
         
         for (typeStr, type) in aggregateTypes {
         
-            if typeName.contain(subStr: typeStr) {res = type}
+            if typeName.contain(typeStr) {res = type}
         }
         
         return res

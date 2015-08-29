@@ -10,7 +10,7 @@ import Foundation
 
 class Reflect: NSObject, NSCoding{
     
-    lazy var mirror: MirrorType = {reflect(self)}()
+    lazy var mirror: _MirrorType = {_reflect(self)}()
 
     required override init(){}
     
@@ -27,7 +27,7 @@ class Reflect: NSObject, NSCoding{
 
             if hasValue {
                 
-                let ignore = contains(ignorePropertiesForCoding!, name)
+                let ignore = ignorePropertiesForCoding!.contains(name)
                 
                 if !ignore {
                 
@@ -50,8 +50,7 @@ class Reflect: NSObject, NSCoding{
             
             if hasValue {
                 
-                let ignore = contains(ignorePropertiesForCoding!, name)
-                
+                let ignore = ignorePropertiesForCoding!.contains(name)
                 if !ignore {
                     
                     aCoder.encodeObject(value as? AnyObject, forKey: name)

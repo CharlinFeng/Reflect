@@ -43,7 +43,7 @@ class Student4: Reflect {
     class func parse(){
         
         let stu4 = Student4.parse(dict: Student4Dict)
-        println(stu4)
+        print(stu4)
     }
     
 }
