@@ -19,8 +19,8 @@ Reflection
 ===============
 <br/>
 ### Reflection
-.Swift 1.2<br/>
-.Xcode 6.3<br/>
+.Swift 2.0<br/>
+.Xcode 7.0<br/>
 .Reflection is available under the MIT license.
 
 
