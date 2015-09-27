@@ -15,10 +15,10 @@
 
 
 <br/><br/><br/>
-Reflection
+Reflect
 ===============
 <br/>
-### Reflection
+### Reflec
 .Swift 2.0<br/>
 .Xcode 7<br/>
 .Reflection is available under the MIT license.
