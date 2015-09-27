@@ -14,7 +14,7 @@
 ===============
 <br/>
 ### 版本信息
-.Swift 2<br/>
+.Swift 2.0<br/>
 .Xcode 7<br/>
 .基于MIT开源协议<br/>
 <br/>
@@ -192,13 +192,9 @@
 
 
 <br/><br/><br/>
-我的事业
+我的事业[关注信息公示牌](https://github.com/CharlinFeng/Show)
 ===============
-西成的事业，渺小而艰难的求生存。前期我们专做全国的移动app外包。如果您能在信息上援助我们，我们万分感谢您的帮助！<br/>
-西成：http://ios-android.cn <br/>
-我的个人微博：http://weibo.com/charlin2015/<br/>
+成都时点软件开发有限公司，渺小而艰难的求生存。前期我们专做全国的移动app外包。如果您能在信息上援助我们，我们万分感谢您的帮助！<br/>
+时点软件：[http://ios-android.cn](http://ios-android.cn) <br/>
+我的个人微博：[http://weibo.com/charlin2015/](http://weibo.com/charlin2015/)<br/>
 <br/><br/>
-三群： 474377358<br/>
-四群： 347446259<br/>
-西部省市朋友加群号： 473185026（实名）<br/>
-swift群： 467237044<br/>
