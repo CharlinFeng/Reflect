@@ -17,7 +17,7 @@ class Student3: Reflect {
     var name: String
     var age: NSNumber
     var pens: [Pen]
-    var score: [Float]
+    var score: [Double]
     required init() {
         
         name = ""
@@ -30,12 +30,8 @@ class Student3: Reflect {
         
         let stu3 = Student3.parse(dict: Student3Dict)
 
-        println(stu3.score.count)
-        
-        for (index,score) in enumerate(stu3.score) {
-            
-            println(score)
-        }
+        print(stu3)
+
     }
     
 }
@@ -43,7 +39,7 @@ class Student3: Reflect {
 
 class Pen: Reflect {
     
-    var length: Float
+    var length: NSNumber
     
     required init() {
         length = 0

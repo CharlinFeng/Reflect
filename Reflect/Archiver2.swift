@@ -32,7 +32,7 @@ class Book2: Reflect {
 //        Book2.save(obj: book2, name: nil)
         let res = Book2.read(name: nil)
         
-        println(res)
+        print(res)
         
     }
     

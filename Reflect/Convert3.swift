@@ -28,11 +28,11 @@ class Person3: Reflect {
         let bag1 = Bag(color: "red", price: 12)
         let bag2 = Bag(color: "blue", price: 15.8)
         
-//        person3.bags = [bag1,bag2]
+        person3.bags = [bag1,bag2]
         
         let dict = person3.toDict()
         
-        println(dict)
+        print(dict)
     }
 }
 

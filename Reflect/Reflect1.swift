@@ -21,7 +21,7 @@ class Person: Reflect {
     var v6: Double
     var v7: NSNumber
     var v8: UIImage
-    var v9: NSData
+    var v9: NSData!
     var v10: Bool
     var v11: Bool?
     var v12: Bool!
@@ -52,13 +52,9 @@ class Person: Reflect {
     class func action(){
         
         self.properties { (name, type, value) -> Void in
-            println("\(name),\(type),\(value)")
+            print("\(name): \(type.isReflect), \(type.typeName)")
         }
         
-        Person.properties { (name, type, _) -> Void in
-            println("\(name),\(type)")
-        }
-       
     }
     
 }

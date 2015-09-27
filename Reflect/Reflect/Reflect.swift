@@ -10,11 +10,11 @@ import Foundation
 
 class Reflect: NSObject, NSCoding{
     
-    lazy var mirror: MirrorType = {reflect(self)}()
+    lazy var mirror: Mirror = {Mirror(reflecting: self)}()
 
     required override init(){}
     
-    required convenience init(coder aDecoder: NSCoder) {
+    required convenience init?(coder aDecoder: NSCoder) {
         
         self.init()
         
@@ -27,7 +27,7 @@ class Reflect: NSObject, NSCoding{
 
             if hasValue {
                 
-                let ignore = contains(ignorePropertiesForCoding!, name)
+                let ignore = (ignorePropertiesForCoding!).contains(name)
                 
                 if !ignore {
                 
@@ -50,7 +50,7 @@ class Reflect: NSObject, NSCoding{
             
             if hasValue {
                 
-                let ignore = contains(ignorePropertiesForCoding!, name)
+                let ignore = (ignorePropertiesForCoding!).contains(name)
                 
                 if !ignore {
                     

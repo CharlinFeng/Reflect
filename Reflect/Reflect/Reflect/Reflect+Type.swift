@@ -15,9 +15,9 @@ class ReflectType {
     /**  系统解析出的Type  */
     var typeClass: Any.Type!
     
-    var disposition: MirrorDisposition!
+    var displayStyle: Mirror.DisplayStyle!
     
-    var dispositionDesc: String!
+    var displayStyleDesc: String!
     
     /**  是否是可选类型  */
     var isOptional: Bool = false
@@ -25,13 +25,15 @@ class ReflectType {
     /**  是否是数组  */
     var isArray: Bool = false
     
+    /**  是否为自定义对象：此对象一定是Reflect的子类  */
+    var isReflect:Bool = false
+    
     /**  真实类型: 可选 + 数组  */
     var realType: RealType = .None
     
-    
-    private var propertyMirrorType: MirrorType
+    private var propertyMirrorType: Mirror
 
-    init(propertyMirrorType: MirrorType){
+    init(propertyMirrorType: Mirror){
         
         self.propertyMirrorType = propertyMirrorType
         
@@ -43,7 +45,6 @@ class ReflectType {
 
 extension ReflectType{
     
-
     /** 开始解析 */
     func parseBegin(){
         
@@ -54,49 +55,50 @@ extension ReflectType{
         parseTypeClass()
         
         /** 类型性质 */
-        parseTypeDisposition()
+        parseTypedisplayStyle()
         
         /** 类型性质（字符串版本） */
-        parseTypeDispositionDesc()
+        parseTypedisplayStyleDesc()
     }
     
     
     /** 解析类型名 */
     func parseTypeName(){
         
-        typeName = "\(propertyMirrorType.valueType)"
+        typeName = "\(propertyMirrorType.subjectType)"
     }
     
     /** 解析类型 */
     func parseTypeClass(){
         
-        typeClass = propertyMirrorType.valueType
+        typeClass = propertyMirrorType.subjectType
     }
     
     /** 类型性质 */
-    func parseTypeDisposition(){
+    func parseTypedisplayStyle(){
+
+        displayStyle = propertyMirrorType.displayStyle
         
-        disposition = propertyMirrorType.disposition
+        if displayStyle == nil && basicTypes.contains(typeName) {displayStyle = .Struct}
+        
+        if extraTypes.contains(typeName) {displayStyle = .Struct}
+        
+        guard displayStyle != nil else {fatalError("[Charlin Feng]: DisplayStyle Must Have Value")}
     }
     
     /** 类型性质（字符串版本） */
-    func parseTypeDispositionDesc(){
+    func parseTypedisplayStyleDesc(){
         
-        if disposition == nil {return}
-        
-        switch disposition! {
+        if displayStyle == nil {return}
+
+        switch displayStyle! {
             
-            case .Class: dispositionDesc = "Class"
-            case .Struct: dispositionDesc = "Struct"
-            case .Optional: dispositionDesc = "Optional"; isOptional = true;
-            case .Enum: dispositionDesc = "Enum"
-            case .Tuple: dispositionDesc = "Tuple"
-            case .IndexContainer: dispositionDesc = "IndexContainer"; isArray = true;
-            case .KeyContainer: dispositionDesc = "KeyContainer"
-            case .MembershipContainer: dispositionDesc = "MembershipContainer"
-            case .Container: dispositionDesc = "Container"
-            case .Aggregate: dispositionDesc = "Aggregate"
-            case .ObjCObject: dispositionDesc = "ObjCObject"
+            case .Struct: displayStyleDesc = "Struct"
+            case .Class: displayStyleDesc = "Class"
+            case .Optional: displayStyleDesc = "Optional"; isOptional = true;
+            case .Enum: displayStyleDesc = "Enum"
+            case .Tuple: displayStyleDesc = "Tuple"
+            default: displayStyleDesc = "Other: Collection/Dictionary/Set"
 
         }
         fetchRealType()
@@ -115,7 +117,6 @@ extension ReflectType{
         case Double = "Double"
         case String = "String"
         case Bool = "Bool"
-        case ObjCObject = "ObjCObject"
         case Class = "Class"
     }
 }
@@ -125,35 +126,40 @@ extension ReflectType{
 
 extension ReflectType{
     
-    var aggregateTypes: [String: Any.Type] {return ["String": String.self, "Int": Int.self, "Float": Float.self, "Double": Double.self, "Bool": Bool.self]}
+    var basicTypes: [String] {return ["String", "Int", "Float", "Double", "Bool"]}
+    var extraTypes: [String] {return ["__NSCFNumber", "_NSContiguousString", "NSTaggedPointerString"]}
+    var sdkTypes: [String] {return ["__NSCFNumber", "_NSContiguousString", "UIImage", "_NSZeroData"]}
+    
+    var aggregateTypes: [String: Any.Type] {return ["String": String.self, "Int": Int.self, "Float": Float.self, "Double": Double.self, "Bool": Bool.self, "NSNumber": NSNumber.self]}
     
     /**  获取真实类型  */
     func fetchRealType(){
         
         if typeName.contain(subStr: "Array") {isArray = true}
-
         if typeName.contain(subStr: "Int") {realType = RealType.Int}
         else if typeName.contain(subStr: "Float") {realType = RealType.Float}
         else if typeName.contain(subStr: "Double") {realType = RealType.Double}
         else if typeName.contain(subStr: "String") {realType = RealType.String}
         else if typeName.contain(subStr: "Bool") {realType = RealType.Bool}
-        else if disposition == MirrorDisposition.ObjCObject {realType = RealType.ObjCObject}
         else {realType = RealType.Class}
         
-        
+        if .Class == realType && !sdkTypes.contains(typeName) {isReflect = true}
     }
     
     /**  数组Element类型截取：截取字符串并返回一个类型  */
-    class func makeClass(arrayString: String) -> Any {
+    class func makeClass(type: ReflectType) -> AnyClass {
         
-        var clsString = arrayString.replacingOccurrencesOfString("Swift.Array<", withString: "").replacingOccurrencesOfString("Swift.Optional<", withString: "").replacingOccurrencesOfString(">", withString: "")
+        let arrayString = type.typeName
         
-        return ClassFromString(clsString)
+        let clsString = arrayString.replacingOccurrencesOfString("Array<", withString: "").replacingOccurrencesOfString("Optional<", withString: "").replacingOccurrencesOfString(">", withString: "")
+        
+        let cls = ClassFromString(clsString)
+        
+        return cls
     }
     
     
     /**  是否为基础数组类型  */
-    
     func isAggregate() -> Any!{
         
         var res: Any! = nil
@@ -168,6 +174,8 @@ extension ReflectType{
     
     /**  check  */
     func check() -> Bool{
+        
+        if isArray {return true}
         
         return self.realType != RealType.Int && self.realType != RealType.Float && self.realType != RealType.Double
     }

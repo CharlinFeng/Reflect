@@ -27,7 +27,7 @@ class Student7: Reflect {
     
     /**  bool  */
     override func setValue(value: AnyObject?, forUndefinedKey key: String) {
-        let res = value as! NSNumber
+
         self.age2 = value as! NSNumber != 0
     }
     
@@ -36,7 +36,7 @@ class Student7: Reflect {
         let stus = Student7.parses(arr: Student7DictArr)
     
         for stu in stus {
-            println(stu)
+            print(stu)
         }
     }
 }

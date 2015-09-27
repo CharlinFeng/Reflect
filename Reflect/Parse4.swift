@@ -22,7 +22,6 @@ class Student4: Reflect {
     var hobby: String
     var funcType: String
     
-    
     required init() {
         hostID = 0
         name = ""
@@ -36,6 +35,7 @@ class Student4: Reflect {
     }
     
     override func ignorePropertiesForParse() -> [String]? {
+  
         return ["funcType"]
     }
     
@@ -43,7 +43,7 @@ class Student4: Reflect {
     class func parse(){
         
         let stu4 = Student4.parse(dict: Student4Dict)
-        println(stu4)
+        print(stu4)
     }
     
 }

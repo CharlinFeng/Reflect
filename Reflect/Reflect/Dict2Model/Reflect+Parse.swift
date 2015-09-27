@@ -27,11 +27,11 @@ extension Reflect{
         return parse(dict: dict!)
     }
     
-    class func parses(#arr: NSArray) -> [Reflect]{
+    class func parses(arr arr: NSArray) -> [Reflect]{
         
         var models: [Reflect] = []
         
-        for (index, dict) in enumerate(arr){
+        for (_ , dict) in arr.enumerate(){
             
             let model = self.parse(dict: dict as! NSDictionary)
             
@@ -42,9 +42,9 @@ extension Reflect{
     }
     
     
-    class func parse(#dict: NSDictionary) -> Self{
+    class func parse(dict dict: NSDictionary) -> Self{
         
-        let model = self()
+        let model = self.init()
         
         let mappingDict = model.mappingDict()
         
@@ -52,20 +52,17 @@ extension Reflect{
 
         model.properties { (name, type, value) -> Void in
             
-            assert(type.check(), "[Charlin Feng]: Property '\(name)' type can not be a '\(type.realType.rawValue)' Type,Please use 'NSNumber' instead!")
-            
             let dataDictHasKey = dict[name] != nil
             let mappdictDictHasKey = mappingDict?[name] != nil
-            let needIgnore = ignoreProperties == nil ? false : contains(ignoreProperties!, name)
+            let needIgnore = ignoreProperties == nil ? false : (ignoreProperties!).contains(name)
             
             if (dataDictHasKey || mappdictDictHasKey) && !needIgnore {
 
-                
-                var key = mappdictDictHasKey ? mappingDict![name]! : name
+                let key = mappdictDictHasKey ? mappingDict![name]! : name
                 
                 if !type.isArray { //不是数组
                     
-                    if type.disposition != MirrorDisposition.Class { // 基本属性：String,Int,Float,Double,Bool
+                    if type.displayStyle != Mirror.DisplayStyle.Class { // 基本属性：String,Int,Float,Double,Bool
                         
                         model.setValue(dict[key], forKeyPath: name)
                         
@@ -92,14 +89,15 @@ extension Reflect{
                         model.setValue(arrAggregate, forKeyPath: name)
                         
                     }else{
-                        let elementModelType =  ReflectType.makeClass(type.typeName) as! Reflect.Type
+                        
+                        let elementModelType =  ReflectType.makeClass(type) as! Reflect.Type
                         
                         //遍历
                         let dictKeyArr = dict[key] as! NSArray
                         
                         var arrM: [Reflect] = []
                         
-                        for (key, value) in enumerate(dictKeyArr) {
+                        for (_, value) in dictKeyArr.enumerate() {
                             
                             let elementModel = elementModelType.parse(dict: value as! NSDictionary)
                             
@@ -111,7 +109,6 @@ extension Reflect{
                 }
 
             }
-            
         }
         
         return model
@@ -122,17 +119,18 @@ extension Reflect{
         
         var intArrM: [T] = []
         
-        for (key, value) in enumerate(arrDict) {
+        if arrDict.count == 0 {return intArrM}
+        
+        for (_, value) in arrDict.enumerate() {
             
             var element: T = temp
             
             if value is String {
             
-                if temp is Int {element = (value as! String).toInt() as! T}
+                if temp is Int {element = Int((value as! String)) as! T}
                 if temp is Float {element = (value as! String).floatValue as! T}
                 if temp is Double {element = (value as! String).doubleValue as! T}
                 element = value as! T
-                
             }else{
                 
                 element = value as! T

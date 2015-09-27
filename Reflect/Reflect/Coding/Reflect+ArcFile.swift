@@ -12,11 +12,11 @@ import Foundation
 extension Reflect{
     
 
-    class func save(#obj: AnyObject! , name: String!) -> String{
+    class func save(obj obj: AnyObject! , name: String!) -> String{
         
         if obj is [AnyObject]{assert(name != nil, "[Charlin Feng]: Name can't be empty when you Archive an array!")}
         
-        let data = obj ?? self()
+        let data = obj ?? self.init()
         
         let path = pathWithName(obj: data, name: name)
 
@@ -25,22 +25,22 @@ extension Reflect{
         return path
     }
     
-    class func read(#name: String!) -> AnyObject?{
+    class func read(name name: String!) -> AnyObject?{
         
-        let path = pathWithName(obj: self(), name: name)
+        let path = pathWithName(obj: self.init(), name: name)
         
         return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
     }
     
-    class func delete(#name: String!){
+    class func delete(name name: String!){
         
         save(obj: nil, name: name)
     }
     
     
-    static func pathWithName(#obj: AnyObject, name: String!) -> String{
+    static func pathWithName(obj obj: AnyObject, name: String!) -> String{
         
-        let fileName = name ?? reflect(obj).summary
+        let fileName = name ?? Mirror(reflecting: obj).description
         
         let path = ArcFile.cachesFolder! + "/" + fileName + ".arc"
         
@@ -51,7 +51,7 @@ extension Reflect{
     class ArcFile {
         
         /**  caches根文件夹  */
-        static var cachesFolder: String? {return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last as? String}
+        static var cachesFolder: String? {return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last}
         
     }
     

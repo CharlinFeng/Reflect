@@ -15,40 +15,39 @@ extension Reflect{
 }
 
 /** 此功能复杂需要长期研讨，本次暂支持致此 */
-func ClassFromString(var str: String) -> AnyClass!{
-    
+func ClassFromString(str: String) -> AnyClass!{
+    //_TtCC7Reflect4User3Fav
     if  var appName = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleName") as? String {
         
-        if appName == "" {appName = (split(NSBundle.mainBundle().bundleIdentifier!){$0 == "."}).last ?? ""}
+        if appName == "" {appName = ((NSBundle.mainBundle().bundleIdentifier!).characters.split{$0 == "."}.map { String($0) }).last ?? ""}
         
-        if !str.contain(subStr: "\(appName).") { println("您传的字符串格式不正确，请包含命名空间。");return nil}
+        var clsStr = str
+        
+        if !str.contain(subStr: "\(appName)."){
+            clsStr = appName + "." + str
+        }
 
-        let strArr = str.explode(".")
+        let strArr = clsStr.explode(".")
         
         var className = ""
         
-        let num = count(strArr)
+        let num = strArr.count
         
         if num <= 2 {
             
-            className = str
+            className = clsStr
             
-        }else if num == 3{
+        }else if num > 3{
            
-            var nameStringM = "_TtCC"
+            var nameStringM = "_TtC" + "C".repeatTimes(num - 2)
             
             /** 数组遍历 */
-            for (index: Int, str: String) in enumerate(strArr){
+            for (_, s): (Int, String) in strArr.enumerate(){
                 
-                nameStringM += "\(count(str))\(str)"
+                nameStringM += "\(s.characters.count)\(s)"
             }
             
             className = nameStringM
-
-        }else{
-            
-            println("命名空间层次过深，暂不支持")
-            return nil
         }
         
         return NSClassFromString(className)

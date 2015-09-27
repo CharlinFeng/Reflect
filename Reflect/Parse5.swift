@@ -18,13 +18,13 @@ class Student5: Reflect {
     var age: NSNumber!
     
     var items1: [String]!
-    var items2: [String!]!
+//    var items2: [String!]!
     var bags: [Bag]!
     
     class func parse(){
         
         let stu5 = Student5.parse(dict: Student5Dict)
 
-        println(stu5)
+        print(stu5)
     }
 }

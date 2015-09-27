@@ -9,31 +9,34 @@
 import Foundation
 
 
-/** 仿OC打印 */
-extension Reflect: Printable{
+
+extension Reflect {
     
+    /** 仿OC打印 */
     override var description: String {
     
         let pointAddr = NSString(format: "%p",unsafeBitCast(self, Int.self)) as String
         
-        var printStr = self.classNameString + " <\(pointAddr)>: " + "\n{"
+        var printStr = self.classNameString + " <\(pointAddr)>: " + "\r{"
         
         self.properties { (name, type, value) -> Void in
             
             if type.isArray {
                 
-                printStr += "\n\n['\(name)']: \(value)"
+                printStr += "\r\r['\(name)']: \(value)"
                 
             }else{
                 
-                printStr += "\n\(name): \(value)"
+                printStr += "\r\(name): \(value)"
             }
         }
     
-        printStr += "\n}"
+        printStr += "\r}"
         
         return printStr
     }
+    
+    
     
 }
 
@@ -41,12 +44,12 @@ extension Reflect: Printable{
 
 extension String{
     
-    func contain(#subStr: String) -> Bool {return (self as NSString).rangeOfString(subStr).length > 0}
+    func contain(subStr subStr: String) -> Bool {return (self as NSString).rangeOfString(subStr).length > 0}
     
     func explode (separator: Character) -> [String] {
-        return split(self, isSeparator: { (element: Character) -> Bool in
+        return self.characters.split(isSeparator: { (element: Character) -> Bool in
             return element == separator
-        })
+        }).map { String($0) }
     }
     
     func replacingOccurrencesOfString(target: String, withString: String) -> String{
@@ -55,4 +58,15 @@ extension String{
     
     var floatValue: Float? {return NSNumberFormatter().numberFromString(self)?.floatValue}
     var doubleValue: Double? {return NSNumberFormatter().numberFromString(self)?.doubleValue}
+    
+    func repeatTimes(times: Int) -> String{
+        
+        var strM = ""
+        
+        for _ in 0..<times {
+            strM += self
+        }
+        
+        return strM
+    }
 }

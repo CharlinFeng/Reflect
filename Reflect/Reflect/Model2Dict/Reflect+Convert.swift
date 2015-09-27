@@ -30,7 +30,7 @@ extension Reflect{
                 }
             }else{
                 
-                if type.realType == ReflectType.RealType.Class { //模型
+                if type.isReflect { //模型
                     
                     if type.isArray { //数组
                         

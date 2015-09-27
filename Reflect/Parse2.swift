@@ -30,7 +30,7 @@ class Student2: Reflect {
         
         let stu2 = Student2.parse(dict: Student2Dict)
     
-        println("\(stu2) \n \(stu2.bag.color),\(stu2.bag.price)")
+        print("\(stu2)")
     }
 }
 
@@ -38,7 +38,7 @@ class Bag: Reflect {
     
     var color: String
     
-    var price: Float
+    var price: NSNumber
     
     required init(){
         color = ""

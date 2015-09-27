@@ -17,20 +17,20 @@ extension Reflect{
     /** 遍历成员属性：对象调用 */
     func properties(property: (name: String, type: ReflectType, value: Any) -> Void){
 
-        for (var i=0; i<mirror.count; i++){
+        for p in mirror.children {
             
-            if mirror[i].0 == "super" {continue}
+            let propertyNameString = p.label!
+
+            let reflectType = ReflectType(propertyMirrorType: Mirror(reflecting: p.value))
             
-            let propertyNameString = mirror[i].0
+            let value = p.value
             
-            let propertyValueInstaceMirrorType = mirror[i].1
-            
-            property(name:propertyNameString , type: ReflectType(propertyMirrorType: propertyValueInstaceMirrorType), value: propertyValueInstaceMirrorType.value)
+            property(name: propertyNameString , type: reflectType, value: value)
         }
     }
     
     /**  静态方法调用  */
-    class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self().properties(property)}
+    class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self.init().properties(property)}
     
     
 }

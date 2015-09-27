@@ -37,10 +37,11 @@ class Book3: Reflect{
         
         let path =  Book3.save(obj: bookArr, name: "book3")
         
-        println(path)
+        print(path)
 
         let arr = Book3.read(name: "book3")
         
+        print(arr)
         
         
     }
