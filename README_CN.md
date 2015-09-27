@@ -192,7 +192,7 @@
 
 
 <br/><br/><br/>
-我的事业[关注信息公示牌](https://github.com/CharlinFeng/Show)
+我的事业:  [关注信息公示牌](https://github.com/CharlinFeng/Show)
 ===============
 成都时点软件开发有限公司，渺小而艰难的求生存。前期我们专做全国的移动app外包。如果您能在信息上援助我们，我们万分感谢您的帮助！<br/>
 时点软件：[http://ios-android.cn](http://ios-android.cn) <br/>
