@@ -1,7 +1,7 @@
 ![image](./Reflect/logo.jpg)<br />
 <br/>
 
-##### 感谢小饭的翻译 [中文版本](https://github.com/nsdictionary/Reflect/blob/master/README_CN.md)
+##### 感谢小饭的翻译 [中文文档](https://github.com/nsdictionary/Reflect/blob/master/README_CN.md)
 
 
 
