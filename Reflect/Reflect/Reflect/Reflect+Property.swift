@@ -20,12 +20,12 @@ extension Reflect{
         for p in mirror.children {
             
             let propertyNameString = p.label!
-
-            let reflectType = ReflectType(propertyMirrorType: Mirror(reflecting: p.value))
             
-            let value = p.value
+            let v = p.value
             
-            property(name: propertyNameString , type: reflectType, value: value)
+            let reflectType = ReflectType(propertyMirrorType: Mirror(reflecting: v), belongType: self.dynamicType)
+                
+            property(name: propertyNameString , type: reflectType, value: v)
         }
     }
     

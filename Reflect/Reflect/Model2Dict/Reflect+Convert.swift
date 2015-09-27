@@ -19,7 +19,7 @@ extension Reflect{
         self.properties { (name, type, value) -> Void in
             if type.isOptional{
                 
-                if type.realType == ReflectType.RealType.Class { //模型
+                if type.isReflect { //模型
                     
                     dict[name] = (value as? Reflect)?.toDict()
                 

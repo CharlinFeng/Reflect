@@ -33,12 +33,8 @@ func ClassFromString(str: String) -> AnyClass!{
         
         let num = strArr.count
         
-        if num <= 2 {
+        if num > 2 || strArr.contains(appName) {
             
-            className = clsStr
-            
-        }else if num > 3{
-           
             var nameStringM = "_TtC" + "C".repeatTimes(num - 2)
             
             /** 数组遍历 */
@@ -48,6 +44,10 @@ func ClassFromString(str: String) -> AnyClass!{
             }
             
             className = nameStringM
+            
+        }else{
+           
+            className = clsStr
         }
         
         return NSClassFromString(className)

@@ -14,8 +14,8 @@
 ===============
 <br/>
 ### 版本信息
-.Swift 2.0<br/>
-.Xcode 67.0<br/>
+.Swift 1.2<br/>
+.Xcode 6.3<br/>
 .基于MIT开源协议<br/>
 <br/>
 ##### 感谢小饭的翻译 [English](https://github.com/nsdictionary/Reflect)
@@ -32,11 +32,10 @@
 
 #### 提示
 注：框架中已为您准备了大量懒人式示例，并且简单到你直接调用类方法即可查看效果，<br/>
-1.Reflect1 为全面的反射演示。<br/>
-2.Parse-Parse8为字典转模型解析系列。<br/>
-3.Convert1-Convert4为模型转字典系列。<br/>
-4.Archiver1-Archiver3为归档系列。<br/>
-使用方法如Studetn1.Parse(),Person1.Convert(),Book1.Action()。<br/>
+1.Parse-Parse8为字典转模型解析系列。<br/>
+2.Convert1-Convert4为模型转字典系列。<br/>
+3.Archiver1-Archiver3为归档系列。<br/>
+使用方法如Studetn1.Parse(),Person1.Convert(),Book1.Action()。
 
 
 
@@ -44,7 +43,7 @@
 核心理论
 ===============
 1.想要使用所有功能，您的模型需要继承自Relfect基类。<br/>
-2.属性的数据类型，最好使用隐式可选。 var v1: [string?]?， var v1: [string!]! 这种怪类型尽量不要出现，框架做了大量断言帮助您使用合理的数据类型。<br/>
+2.属性的数据类型，最好使用隐式可选。 var v1: [string?]? 这种怪类型尽量不要出现，框架做了大量断言帮助您使用合理的数据类型。<br/>
 3.框架建立的是网络json解析到字典再到模型需求之上.未考虑复杂数据类型如Core Data支持；未考虑Struct。<br/>
 
 

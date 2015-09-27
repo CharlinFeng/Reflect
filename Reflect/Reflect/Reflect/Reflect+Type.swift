@@ -19,6 +19,8 @@ class ReflectType {
     
     var displayStyleDesc: String!
     
+    var belongType: Any.Type!
+    
     /**  是否是可选类型  */
     var isOptional: Bool = false
     
@@ -33,10 +35,10 @@ class ReflectType {
     
     private var propertyMirrorType: Mirror
 
-    init(propertyMirrorType: Mirror){
+    init(propertyMirrorType: Mirror, belongType: Any.Type){
         
         self.propertyMirrorType = propertyMirrorType
-        
+        self.belongType = belongType
         /** 开始解析 */
         parseBegin()
     }
@@ -65,7 +67,7 @@ extension ReflectType{
     /** 解析类型名 */
     func parseTypeName(){
         
-        typeName = "\(propertyMirrorType.subjectType)"
+        typeName = "\(propertyMirrorType.subjectType)".deleteSpecialStr()
     }
     
     /** 解析类型 */
@@ -109,6 +111,17 @@ extension ReflectType{
 
 extension ReflectType{
     
+    enum BasicType: String{
+        
+        case String
+        case Int
+        case Float
+        case Double
+        case Bool
+        case NSNumber
+    }
+
+
     enum RealType: String{
         
         case None = "None"
@@ -128,7 +141,7 @@ extension ReflectType{
     
     var basicTypes: [String] {return ["String", "Int", "Float", "Double", "Bool"]}
     var extraTypes: [String] {return ["__NSCFNumber", "_NSContiguousString", "NSTaggedPointerString"]}
-    var sdkTypes: [String] {return ["__NSCFNumber", "_NSContiguousString", "UIImage", "_NSZeroData"]}
+    var sdkTypes: [String] {return ["__NSCFNumber", "NSNumber", "_NSContiguousString", "UIImage", "_NSZeroData"]}
     
     var aggregateTypes: [String: Any.Type] {return ["String": String.self, "Int": Int.self, "Float": Float.self, "Double": Double.self, "Bool": Bool.self, "NSNumber": NSNumber.self]}
     
@@ -143,7 +156,10 @@ extension ReflectType{
         else if typeName.contain(subStr: "Bool") {realType = RealType.Bool}
         else {realType = RealType.Class}
         
-        if .Class == realType && !sdkTypes.contains(typeName) {isReflect = true}
+        if .Class == realType && !sdkTypes.contains(typeName) {
+            
+            isReflect = true
+        }
     }
     
     /**  数组Element类型截取：截取字符串并返回一个类型  */
@@ -153,9 +169,16 @@ extension ReflectType{
         
         let clsString = arrayString.replacingOccurrencesOfString("Array<", withString: "").replacingOccurrencesOfString("Optional<", withString: "").replacingOccurrencesOfString(">", withString: "")
         
-        let cls = ClassFromString(clsString)
+        var cls: AnyClass? = ClassFromString(clsString)
         
-        return cls
+        if cls == nil && type.isReflect {
+            
+            let nameSpaceString = "\(type.belongType).\(clsString)"
+            
+            cls = ClassFromString(nameSpaceString)
+        }
+        
+        return cls!
     }
     
     

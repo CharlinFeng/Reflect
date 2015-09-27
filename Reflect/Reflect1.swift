@@ -49,7 +49,7 @@ class Person: Reflect {
         v17 = []
     }
 
-    class func action(){
+    class func reflect(){
         
         self.properties { (name, type, value) -> Void in
             print("\(name): \(type.isReflect), \(type.typeName)")

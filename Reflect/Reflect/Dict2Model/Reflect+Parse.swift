@@ -62,7 +62,7 @@ extension Reflect{
                 
                 if !type.isArray { //不是数组
                     
-                    if type.displayStyle != Mirror.DisplayStyle.Class { // 基本属性：String,Int,Float,Double,Bool
+                    if !type.isReflect { // 基本属性：String,Int,Float,Double,Bool
                         
                         model.setValue(dict[key], forKeyPath: name)
                         
@@ -77,14 +77,22 @@ extension Reflect{
                     if let res = type.isAggregate(){
                         
                         var arrAggregate = []
+        
                         
-                        if res is Int.Type {arrAggregate = self.parseAggregateArray(dict[key] as! NSArray, temp: 0)}
                         
-                        if res is Float.Type {arrAggregate = self.parseAggregateArray(dict[key] as! NSArray, temp: 0.0)}
-                        
-                        if res is Double.Type {arrAggregate = self.parseAggregateArray(dict[key] as! NSArray, temp: 0.0)}
-                        
-                        if res is String.Type {arrAggregate = self.parseAggregateArray(dict[key] as! NSArray, temp: "")}
+                        if res is Int.Type {
+                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Int, ins: 0)
+                        }else if res is Float.Type {
+                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Float, ins: 0.0)
+                        }else if res is Double.Type {
+                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Double, ins: 0.0)
+                        }else if res is String.Type {
+                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.String, ins: "")
+                        }else if res is NSNumber.Type {
+                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.NSNumber, ins: NSNumber())
+                        }else{
+                            arrAggregate = dict[key] as! [AnyObject]
+                        }
                         
                         model.setValue(arrAggregate, forKeyPath: name)
                         
@@ -115,7 +123,7 @@ extension Reflect{
     }
     
     
-    class func parseAggregateArray<T>(arrDict: NSArray,temp: T) -> [T]{
+    class func parseAggregateArray<T>(arrDict: NSArray,basicType: ReflectType.BasicType, ins: T) -> [T]{
         
         var intArrM: [T] = []
         
@@ -123,18 +131,20 @@ extension Reflect{
         
         for (_, value) in arrDict.enumerate() {
             
-            var element: T = temp
+            var element: T = ins
             
-            if value is String {
+            let v = "\(value)"
             
-                if temp is Int {element = Int((value as! String)) as! T}
-                if temp is Float {element = (value as! String).floatValue as! T}
-                if temp is Double {element = (value as! String).doubleValue as! T}
-                element = value as! T
-            }else{
-                
-                element = value as! T
+
+            
+            if T.self is Int.Type {
+                element = Int(Float(v)!) as! T
             }
+            else if T.self is Float.Type {element = v.floatValue as! T}
+            else if T.self is Double.Type {element = v.doubleValue as! T}
+            else if T.self is NSNumber.Type {element = NSNumber(double: v.doubleValue!) as! T}
+            else{element = value as! T}
+
             
             intArrM.append(element)
         }

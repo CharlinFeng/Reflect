@@ -56,6 +56,11 @@ extension String{
         return (self as NSString).stringByReplacingOccurrencesOfString(target, withString: withString)
     }
     
+    func deleteSpecialStr()->String{
+    
+        return self.replacingOccurrencesOfString("Optional<", withString: "").replacingOccurrencesOfString(">", withString: "")
+    }
+    
     var floatValue: Float? {return NSNumberFormatter().numberFromString(self)?.floatValue}
     var doubleValue: Double? {return NSNumberFormatter().numberFromString(self)?.doubleValue}
     

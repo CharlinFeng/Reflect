@@ -19,8 +19,8 @@ Reflection
 ===============
 <br/>
 ### Reflection
-.Swift 2.0<br/>
-.Xcode 7.0<br/>
+.Swift 1.2<br/>
+.Xcode 6.3<br/>
 .Reflection is available under the MIT license.
 
 
@@ -37,10 +37,9 @@ Structure Details：<br/>
 #### Tips
 This frame already prepares many examples for lazy guys and it’s easy to see the result when u just use the methord
 Person1.Convert(),Studetn1.Parse(),Book1.Action()<br/>
-1.Reflect1: Any Type's Reflect Info <br/>
-2.Parse-Parse8: convert dictionary to model<br/>
-3.Convert1-Convert4: convert model to dictionary<br/>
-4.Archiver1-Archiver3: One key archive<br/>
+1.Parse-Parse8: convert dictionary to model<br/>
+2.Convert1-Convert4: convert model to dictionary<br/>
+3.Archiver1-Archiver3: One key archive<br/>
 
 
 

@@ -17,7 +17,7 @@ class Student3: Reflect {
     var name: String
     var age: NSNumber
     var pens: [Pen]
-    var score: [Double]
+    var score: [Int]
     required init() {
         
         name = ""
@@ -34,14 +34,15 @@ class Student3: Reflect {
 
     }
     
-}
-
-
-class Pen: Reflect {
-    
-    var length: NSNumber
-    
-    required init() {
-        length = 0
+    class Pen: Reflect {
+        
+        var length: NSNumber
+        
+        required init() {
+            length = 0
+        }
     }
+    
 }
+
+
