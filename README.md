@@ -47,7 +47,7 @@ Person1.Convert(),Studetn1.Parse(),Book1.Action()<br/>
 <br/><br/><br/>
 Core theory
 ===============
-1. If you wanna use all the functions, all your custom model must inherit from `Reflec` Class.<br/>
+1. If you wanna use all the functions, all your custom model must inherit from `Reflect` Class.<br/>
 
 2. It’s better to use implicitly optional type for properties. Try not to use strange type like var v1: [string?]? , var v2: [string!]! and this frame has lots of assertion to help you use data type reasonably.<br/>
 3. This frame is based on requirement : parse json data into dictionaries then to model.
