@@ -195,11 +195,3 @@ additional function: ignore archive field
         return ["icon"]
     }
 
-
-<br/><br/><br/>
-Career
-===============
-WebSite：http://ios-android.cn <br/>
-Sina WeiBo：http://weibo.com/charlin2015/<br/>
-<br/><br/>
-
