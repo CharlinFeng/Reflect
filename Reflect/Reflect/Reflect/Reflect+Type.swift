@@ -12,7 +12,6 @@ class ReflectType {
     
     var typeName: String!
     
-    /**  系统解析出的Type  */
     var typeClass: Any.Type!
     
     var displayStyle: Mirror.DisplayStyle!
@@ -21,16 +20,12 @@ class ReflectType {
     
     var belongType: Any.Type!
     
-    /**  是否是可选类型  */
     var isOptional: Bool = false
     
-    /**  是否是数组  */
     var isArray: Bool = false
     
-    /**  是否为自定义对象：此对象一定是Reflect的子类  */
     var isReflect:Bool = false
     
-    /**  真实类型: 可选 + 数组  */
     var realType: RealType = .None
     
     private var propertyMirrorType: Mirror
@@ -38,8 +33,9 @@ class ReflectType {
     init(propertyMirrorType: Mirror, belongType: Any.Type){
         
         self.propertyMirrorType = propertyMirrorType
+        
         self.belongType = belongType
-        /** 开始解析 */
+        
         parseBegin()
     }
 }
@@ -47,36 +43,27 @@ class ReflectType {
 
 extension ReflectType{
     
-    /** 开始解析 */
     func parseBegin(){
         
-        /** 解析类型名 */
         parseTypeName()
         
-        /** 解析类型 */
         parseTypeClass()
         
-        /** 类型性质 */
         parseTypedisplayStyle()
         
-        /** 类型性质（字符串版本） */
         parseTypedisplayStyleDesc()
     }
     
-    
-    /** 解析类型名 */
     func parseTypeName(){
         
         typeName = "\(propertyMirrorType.subjectType)".deleteSpecialStr()
     }
     
-    /** 解析类型 */
     func parseTypeClass(){
         
         typeClass = propertyMirrorType.subjectType
     }
     
-    /** 类型性质 */
     func parseTypedisplayStyle(){
 
         displayStyle = propertyMirrorType.displayStyle
@@ -88,7 +75,6 @@ extension ReflectType{
         guard displayStyle != nil else {fatalError("[Charlin Feng]: DisplayStyle Must Have Value")}
     }
     
-    /** 类型性质（字符串版本） */
     func parseTypedisplayStyleDesc(){
         
         if displayStyle == nil {return}
@@ -145,7 +131,6 @@ extension ReflectType{
     
     var aggregateTypes: [String: Any.Type] {return ["String": String.self, "Int": Int.self, "Float": Float.self, "Double": Double.self, "Bool": Bool.self, "NSNumber": NSNumber.self]}
     
-    /**  获取真实类型  */
     func fetchRealType(){
         
         if typeName.contain(subStr: "Array") {isArray = true}
@@ -162,7 +147,6 @@ extension ReflectType{
         }
     }
     
-    /**  数组Element类型截取：截取字符串并返回一个类型  */
     class func makeClass(type: ReflectType) -> AnyClass {
         
         let arrayString = type.typeName
@@ -181,8 +165,6 @@ extension ReflectType{
         return cls!
     }
     
-    
-    /**  是否为基础数组类型  */
     func isAggregate() -> Any!{
         
         var res: Any! = nil
@@ -195,7 +177,6 @@ extension ReflectType{
         return res
     }
     
-    /**  check  */
     func check() -> Bool{
         
         if isArray {return true}

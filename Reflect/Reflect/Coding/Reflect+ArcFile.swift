@@ -32,10 +32,7 @@ extension Reflect{
         return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
     }
     
-    class func delete(name name: String!){
-        
-        save(obj: nil, name: name)
-    }
+    class func delete(name name: String!){save(obj: nil, name: name)}
     
     
     static func pathWithName(obj obj: AnyObject, name: String!) -> String{
@@ -49,15 +46,9 @@ extension Reflect{
     
 
     class ArcFile {
-        
-        /**  caches根文件夹  */
+
         static var cachesFolder: String? {return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last}
-        
     }
     
-    /**  归档字段忽略  */
-    func ignoreCodingPropertiesForCoding() -> [String]? {
-        return nil
-    }
-
+    func ignoreCodingPropertiesForCoding() -> [String]? {return nil}
 }

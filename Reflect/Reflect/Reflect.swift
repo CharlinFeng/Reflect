@@ -37,8 +37,8 @@ class Reflect: NSObject, NSCoding{
                 self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
             }
         }
-        
     }
+    
     
     func encodeWithCoder(aCoder: NSCoder) {
         
@@ -63,8 +63,6 @@ class Reflect: NSObject, NSCoding{
         }
         
     }
-    
-    
 }
 
 

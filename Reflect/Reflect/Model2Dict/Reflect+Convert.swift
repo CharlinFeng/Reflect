@@ -8,9 +8,7 @@
 
 import Foundation
 
-/**  模型转字典  */
 extension Reflect{
-    
     
     func toDict() -> [String: Any]{
        
@@ -19,20 +17,20 @@ extension Reflect{
         self.properties { (name, type, value) -> Void in
             if type.isOptional{
                 
-                if type.isReflect { //模型
+                if type.isReflect {
                     
                     dict[name] = (value as? Reflect)?.toDict()
                 
-                    
-                }else{ //基本属性
+                }else{
                     
                     dict[name] = "\(value)".replacingOccurrencesOfString("Optional(", withString: "").replacingOccurrencesOfString(")", withString: "").replacingOccurrencesOfString("\"", withString: "")
                 }
+                
             }else{
                 
-                if type.isReflect { //模型
+                if type.isReflect {
                     
-                    if type.isArray { //数组
+                    if type.isArray {
                         
                         var dictM: [[String: Any]] = []
                     
@@ -52,25 +50,15 @@ extension Reflect{
                         dict[name] = (value as! Reflect).toDict()
                     }
                     
-                    
-                    
-                    
-                    
-                }else{ //基本属性
+                }else{
                     
                     dict[name] = "\(value)".replacingOccurrencesOfString("Optional(", withString: "").replacingOccurrencesOfString(")", withString: "").replacingOccurrencesOfString("\"", withString: "")
                 }
             }
             
-
-            
-            
-            
         }
         
         return dict
     }
-    
-    
 }
 

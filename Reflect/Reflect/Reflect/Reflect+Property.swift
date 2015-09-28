@@ -10,11 +10,8 @@ import Foundation
 
 extension Reflect{
     
-    
-    /** 获取类名 */
     var classNameString: String {return "\(self.dynamicType)"}
     
-    /** 遍历成员属性：对象调用 */
     func properties(property: (name: String, type: ReflectType, value: Any) -> Void){
 
         for p in mirror.children {
@@ -29,10 +26,7 @@ extension Reflect{
         }
     }
     
-    /**  静态方法调用  */
     class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self.init().properties(property)}
-    
-    
 }
 
 

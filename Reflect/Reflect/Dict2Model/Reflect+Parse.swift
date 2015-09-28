@@ -11,11 +11,8 @@ import Foundation
 
 extension Reflect{
     
-    
-    
     class func parsePlist(name: String) -> Self?{
     
-        //加载plist
         let path = NSBundle.mainBundle().pathForResource(name+".plist", ofType: nil)
         
         if path == nil {return nil}
@@ -60,9 +57,9 @@ extension Reflect{
 
                 let key = mappdictDictHasKey ? mappingDict![name]! : name
                 
-                if !type.isArray { //不是数组
+                if !type.isArray {
                     
-                    if !type.isReflect { // 基本属性：String,Int,Float,Double,Bool
+                    if !type.isReflect {
                         
                         model.setValue(dict[key], forKeyPath: name)
                         
@@ -78,8 +75,6 @@ extension Reflect{
                         
                         var arrAggregate = []
         
-                        
-                        
                         if res is Int.Type {
                             arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Int, ins: 0)
                         }else if res is Float.Type {
@@ -100,7 +95,6 @@ extension Reflect{
                         
                         let elementModelType =  ReflectType.makeClass(type) as! Reflect.Type
                         
-                        //遍历
                         let dictKeyArr = dict[key] as! NSArray
                         
                         var arrM: [Reflect] = []
@@ -153,15 +147,8 @@ extension Reflect{
     }
     
     
-    /**  字段映射  */
-    func mappingDict() -> [String: String]? {
-        return nil
-    }
+    func mappingDict() -> [String: String]? {return nil}
     
-    /**  字段忽略  */
-    func ignorePropertiesForParse() -> [String]? {
-        return nil
-    }
-    
+    func ignorePropertiesForParse() -> [String]? {return nil}
 }
 

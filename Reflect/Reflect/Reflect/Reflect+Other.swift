@@ -12,7 +12,6 @@ import Foundation
 
 extension Reflect {
     
-    /** 仿OC打印 */
     override var description: String {
     
         let pointAddr = NSString(format: "%p",unsafeBitCast(self, Int.self)) as String
@@ -35,9 +34,6 @@ extension Reflect {
         
         return printStr
     }
-    
-    
-    
 }
 
 
