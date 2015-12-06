@@ -12,9 +12,9 @@ import Foundation
 class Book1: Reflect {
     
     var name: String
-    var price: Float
+    var price: NSNumber
     
-    init(name: String, price: Float){
+    init(name: String, price: NSNumber){
         
         self.name = name
         self.price = price
@@ -30,8 +30,18 @@ class Book1: Reflect {
         
         let book1 = Book1(name: "tvb", price: 36.6)
 
-        Book1.delete(name: nil)
-        print(book1)
+        
+        if Book1.read(name: "book1") == nil {
+            
+            //无缓存或缓存过期
+            print("无缓存或缓存过期")
+            
+            Book1.save(obj: book1, name: "book1", duration: 10)
+            
+        }else {
+            
+            print("有缓存")
+        }
         
     }
     

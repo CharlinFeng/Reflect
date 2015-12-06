@@ -12,9 +12,6 @@ import UIKit
 
 class User {
     
-    class Fav {
-        
-    }
 }
 
 
@@ -25,7 +22,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Book3.action()
+        Book1.action()
+        
+        
     }
 
 
