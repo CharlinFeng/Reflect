@@ -29,16 +29,18 @@ extension Reflect{
         return path
     }
     
-    class func read(name name: String!) -> AnyObject?{
+    class func read(name name: String!) -> (Bool, AnyObject!){
         
         let time = NSUserDefaults.standardUserDefaults().doubleForKey(name)
         let duration = NSUserDefaults.standardUserDefaults().doubleForKey(name+"duration")
         let now = NSDate().timeIntervalSince1970
-        if time > 0 && duration > 0 && time + duration < now {return nil}
-        
         let path = pathWithName(obj: self.init(), name: name)
         
-        return NSKeyedUnarchiver.unarchiveObjectWithFile(path)
+        let obj = NSKeyedUnarchiver.unarchiveObjectWithFile(path)
+    
+        if time > 0 && duration > 0 && time + duration < now {return (false,obj)}
+        
+        return (true,obj)
     }
     
     class func delete(name name: String!){save(obj: nil, name: name, duration: 0)}

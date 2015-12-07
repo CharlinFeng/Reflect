@@ -31,16 +31,18 @@ class Book1: Reflect {
         let book1 = Book1(name: "tvb", price: 36.6)
 
         
-        if Book1.read(name: "book1") == nil {
+        let res = Book1.read(name: "book1")
+        
+        if res.0 {
             
-            //无缓存或缓存过期
-            print("无缓存或缓存过期")
-            
-            Book1.save(obj: book1, name: "book1", duration: 10)
+            print("有缓存")
+
             
         }else {
             
-            print("有缓存")
+            print("无缓存或缓存过期")
+            
+            Book1.save(obj: book1, name: "book1", duration: 10)
         }
         
     }
