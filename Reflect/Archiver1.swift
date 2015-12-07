@@ -40,7 +40,15 @@ class Book1: Reflect {
             
         }else {
             
-            print("无缓存或缓存过期")
+            if res.1 == nil {
+            
+                print("无缓存")
+            }else{
+                
+                print("缓存过期")
+            }
+            
+            
             
             Book1.save(obj: book1, name: "book1", duration: 10)
         }

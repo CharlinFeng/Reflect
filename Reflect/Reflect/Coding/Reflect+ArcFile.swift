@@ -39,6 +39,7 @@ extension Reflect{
         let obj = NSKeyedUnarchiver.unarchiveObjectWithFile(path)
     
         if time > 0 && duration > 0 && time + duration < now {return (false,obj)}
+        if obj == nil {return (false,obj)}
         
         return (true,obj)
     }
