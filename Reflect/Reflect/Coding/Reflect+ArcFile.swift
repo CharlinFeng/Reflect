@@ -12,7 +12,7 @@ import Foundation
 extension Reflect{
     
     class func save(obj obj: AnyObject! , name: String!, duration: NSTimeInterval) -> String{
-    
+        
         if duration > 0 {
             NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: name)
             NSUserDefaults.standardUserDefaults().setDouble(duration, forKey: name+"duration")
@@ -23,9 +23,23 @@ extension Reflect{
         let data = obj ?? self.init()
         
         let path = pathWithName(obj: data, name: name)
-
-        NSKeyedArchiver.archiveRootObject(data, toFile: path)
-       
+        
+        if obj != nil {
+            NSKeyedArchiver.archiveRootObject(data, toFile: path)
+        }else{
+            
+            let fm = NSFileManager.defaultManager()
+            if fm.isDeletableFileAtPath(path){
+                do {
+                    try fm.removeItemAtPath(path)
+                }catch {
+                    print("删除失败")
+                }
+                
+            }
+        }
+        
+        
         return path
     }
     
