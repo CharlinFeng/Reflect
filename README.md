@@ -19,6 +19,7 @@ Reflect
 ===============
 <br/>
 ### Reflec
+.iOS 7.0 <br/>
 .Swift 2.0<br/>
 .Xcode 7<br/>
 .Reflection is available under the MIT license.
