@@ -11,44 +11,49 @@ import Foundation
 
 extension Reflect{
     
-    class func save(obj obj: AnyObject! , name: String!, duration: NSTimeInterval) -> String{
+    static var DurationKey: String {return "Duration"}
+    
+    
+    class func save(obj obj: AnyObject! , name: String, duration: NSTimeInterval) -> String{
         
         if duration > 0 {
+            
             NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: name)
-            NSUserDefaults.standardUserDefaults().setDouble(duration, forKey: name+"duration")
+            NSUserDefaults.standardUserDefaults().setDouble(duration, forKey: name + DurationKey)
         }
         
-        if obj is [AnyObject]{assert(name != nil, "[Charlin Feng]: Name can't be empty when you Archive an array!")}
-        
-        let data = obj ?? self.init()
-        
-        let path = pathWithName(obj: data, name: name)
+        let path = pathWithName(name)
         
         if obj != nil {
-            NSKeyedArchiver.archiveRootObject(data, toFile: path)
+            
+            NSKeyedArchiver.archiveRootObject(obj, toFile: path)
+            
         }else{
             
             let fm = NSFileManager.defaultManager()
-            if fm.isDeletableFileAtPath(path){
-                do {
-                    try fm.removeItemAtPath(path)
-                }catch {
-                    print("删除失败")
-                }
+            if fm.fileExistsAtPath(path) {
                 
+                if fm.isDeletableFileAtPath(path){
+                    do {
+                        try fm.removeItemAtPath(path)
+                    }catch {
+                        print("删除失败")
+                    }
+                }
             }
+            
         }
         
         
         return path
     }
     
-    class func read(name name: String!) -> (Bool, AnyObject!){
+    class func read(name name: String) -> (Bool, AnyObject!){
         
         let time = NSUserDefaults.standardUserDefaults().doubleForKey(name)
-        let duration = NSUserDefaults.standardUserDefaults().doubleForKey(name+"duration")
+        let duration = NSUserDefaults.standardUserDefaults().doubleForKey(name + DurationKey)
         let now = NSDate().timeIntervalSince1970
-        let path = pathWithName(obj: self.init(), name: name)
+        let path = pathWithName(name)
         
         let obj = NSKeyedUnarchiver.unarchiveObjectWithFile(path)
     
@@ -58,14 +63,11 @@ extension Reflect{
         return (true,obj)
     }
     
-    class func delete(name name: String!){save(obj: nil, name: name, duration: 0)}
+    class func deleteReflectModel(name name: String){save(obj: nil, name: name, duration: 0)}
     
-    
-    static func pathWithName(obj obj: AnyObject, name: String!) -> String{
-        
-        let fileName = name ?? Mirror(reflecting: obj).description
-        
-        let path = ArcFile.cachesFolder! + "/" + fileName + ".arc"
+    static func pathWithName(name: String) -> String{
+ 
+        let path = ArcFile.cachesFolder! + "/" + name + ".arc"
         
         return path
     }

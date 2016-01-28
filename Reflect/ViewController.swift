@@ -22,26 +22,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Person.reflect()
+        
+        Student1.parse()
+        Student2.parse()
+        Student3.parse()
+        Student4.parse()
+        Student5.parse()
+        Student6.parse()
+        Student7.parse()
+        Author.parse()
+        
+        Person1.convert()
+        Person2.convert()
+        Person3.convert()
+        Person4.convert()
+        
         
         Book1.action()
-        
-        let aaaaa = User.self
-
-    
-        let u1 = User()
-        
-        
-        
-        let bbbbb = u1.self
-   
-    
-        
-        
-//        let ccccc = User.dynamicType
-        let dddddd = u1.dynamicType
-        let eeeeee = u1.self
-        
-        
+        Book2.action()
+        Book3.action()
         
         
     }

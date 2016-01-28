@@ -29,8 +29,9 @@ class Book2: Reflect {
         
         book2.writter = writter
         
-//        Book2.save(obj: book2, name: nil)
-        let res = Book2.read(name: nil)
+//        Book2.save(obj: book2, name: "Book2", duration: 10)
+        Book2.deleteReflectModel(name: "Book2")
+        let res = Book2.read(name: "Book2")
         
         print(res)
         

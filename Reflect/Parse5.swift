@@ -18,7 +18,7 @@ class Student5: Reflect {
     var age: NSNumber!
     
     var items1: [String]!
-//    var items2: [String!]!
+
     var bags: [Bag]!
     
     class func parse(){

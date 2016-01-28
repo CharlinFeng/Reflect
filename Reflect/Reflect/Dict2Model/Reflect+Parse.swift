@@ -61,11 +61,39 @@ extension Reflect{
                     
                     if !type.isReflect {
                         
-                        model.setValue(dict[key], forKeyPath: name)
+                        if type.typeClass == Bool.self { //bool
+                            
+                            model.setValue(dict[key]?.boolValue, forKeyPath: name)
+                            
+                        }else{
+                            model.setValue(dict[key], forKeyPath: name)
+                        }
+                        
+                        
                         
                     }else{
                         
-                        model.setValue((type.typeClass as! Reflect.Type).parse(dict: dict[key] as! NSDictionary), forKeyPath: name)
+                        //这里是模型
+                        //首选判断字典中是否有值
+                        let dictValue = dict[key]
+                        
+                        if dictValue != nil { //字典中有模型
+                            
+                            let modelValue = model.valueForKeyPath(key)
+                            
+                            if modelValue != nil { //子模型已经初始化
+                                
+                                model.setValue((type.typeClass as! Reflect.Type).parse(dict: dict[key] as! NSDictionary), forKeyPath: name)
+                                
+                            }else{ //子模型没有初始化
+                                
+                                //先主动初始化
+                                let cls = ClassFromString(type.typeName)
+                                model.setValue((cls as! Reflect.Type).parse(dict: dict[key] as! NSDictionary), forKeyPath: name)
+                            }
+                        }
+                        
+                        
                         
                     }
                     
@@ -112,6 +140,8 @@ extension Reflect{
 
             }
         }
+        
+        model.parseOver()
         
         return model
     }

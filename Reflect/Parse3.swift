@@ -14,6 +14,15 @@ let Student3Dict = ["name": "jack", "age": 28, "pens": [["length":5.5],["length"
 /**  主要完成数组的转换  */
 class Student3: Reflect {
     
+    class Pen: Reflect {
+        
+        var length: NSNumber
+        
+        required init() {
+            length = 0
+        }
+    }
+    
     var name: String
     var age: NSNumber
     var pens: [Pen]
@@ -34,14 +43,7 @@ class Student3: Reflect {
 
     }
     
-    class Pen: Reflect {
-        
-        var length: NSNumber
-        
-        required init() {
-            length = 0
-        }
-    }
+
     
 }
 

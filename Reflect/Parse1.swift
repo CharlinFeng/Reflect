@@ -42,4 +42,8 @@ class Student1: Reflect {
         
         print(stu1)
     }
+    
+    override func parseOver() {
+        print("转换结束")
+    }
 }

@@ -72,7 +72,7 @@ extension ReflectType{
         
         if extraTypes.contains(typeName) {displayStyle = .Struct}
         
-        guard displayStyle != nil else {fatalError("[Charlin Feng]: DisplayStyle Must Have Value")}
+//        guard displayStyle != nil else {fatalError("[Charlin Feng]: DisplayStyle Must Have Value")}
     }
     
     func parseTypedisplayStyleDesc(){
