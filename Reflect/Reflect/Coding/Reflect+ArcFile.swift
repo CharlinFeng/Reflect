@@ -67,16 +67,37 @@ extension Reflect{
     
     static func pathWithName(name: String) -> String{
  
-        let path = ArcFile.cachesFolder! + "/" + name + ".arc"
+        let path = Reflect.cachesFolder! + "/" + name + ".arc"
         
         return path
     }
+
+    static var cachesFolder: String? {
+        
+        let cacheRootPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last
     
-
-    class ArcFile {
-
-        static var cachesFolder: String? {return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last}
+        let cache_reflect_path = cacheRootPath! + "/" + "Reflect"
+        
+        let fm = NSFileManager.defaultManager()
+        
+        let existed = fm.fileExistsAtPath(cache_reflect_path)
+        
+        if !existed {
+            
+            print("cache_reflect_path不存在")
+            do {
+                try fm.createDirectoryAtPath(cache_reflect_path, withIntermediateDirectories: true, attributes: nil)
+                print("cache_reflect_path创建中")
+            }catch {}
+            
+        }else{
+        
+            print("cache_reflect_path已经存在")
+        }
+        
+        return cache_reflect_path
     }
+
     
     func ignoreCodingPropertiesForCoding() -> [String]? {return nil}
 }
