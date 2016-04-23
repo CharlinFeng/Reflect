@@ -39,6 +39,7 @@
 		89B8337A1B842549002C60EB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89B833781B842549002C60EB /* LaunchScreen.xib */; };
 		89B833861B84254A002C60EB /* ReflectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B833851B84254A002C60EB /* ReflectTests.swift */; };
 		89B833981B84343D002C60EB /* Reflect1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B833971B84343D002C60EB /* Reflect1.swift */; };
+		89D047B61CCB1668000EB03C /* BugFix2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D047B51CCB1668000EB03C /* BugFix2.swift */; };
 		89FAC4961C5A1E30002336F1 /* BugFix1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FAC4951C5A1E30002336F1 /* BugFix1.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		89B833841B84254A002C60EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89B833851B84254A002C60EB /* ReflectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReflectTests.swift; sourceTree = "<group>"; };
 		89B833971B84343D002C60EB /* Reflect1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reflect1.swift; sourceTree = "<group>"; };
+		89D047B51CCB1668000EB03C /* BugFix2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugFix2.swift; sourceTree = "<group>"; };
 		89FAC4951C5A1E30002336F1 /* BugFix1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugFix1.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 				895CD9891B8A06160046B1D0 /* Archiver2.swift */,
 				895CD98B1B8A09030046B1D0 /* Archiver3.swift */,
 				89FAC4951C5A1E30002336F1 /* BugFix1.swift */,
+				89D047B51CCB1668000EB03C /* BugFix2.swift */,
 				89B833711B842549002C60EB /* ViewController.swift */,
 				89B833731B842549002C60EB /* Main.storyboard */,
 				89B833761B842549002C60EB /* Images.xcassets */,
@@ -364,6 +367,7 @@
 				895CD9861B89F5A10046B1D0 /* Reflect.swift in Sources */,
 				895CD9841B89F5A10046B1D0 /* Reflect+Property.swift in Sources */,
 				89B833701B842549002C60EB /* AppDelegate.swift in Sources */,
+				89D047B61CCB1668000EB03C /* BugFix2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
