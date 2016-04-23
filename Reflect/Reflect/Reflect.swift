@@ -15,16 +15,20 @@ class Reflect: NSObject, NSCoding{
     required override init(){}
     
     required convenience init?(coder aDecoder: NSCoder) {
-        
+
         self.init()
         
         let ignorePropertiesForCoding = self.ignoreCodingPropertiesForCoding()
         
         self.properties { (name, type, value) -> Void in
-             assert(type.check(), "[Charlin Feng]: Property '\(name)' type can not be a '\(type.realType.rawValue)' Type,Please use 'NSNumber' instead!")
+            
+            assert(type.check(), "[Charlin Feng]: Property '\(name)' type can not be a '\(type.realType.rawValue)' Type,Please use 'NSNumber' instead!")
             
             let hasValue = ignorePropertiesForCoding != nil
 
+            print("aDecoder:\(name),\(aDecoder.decodeObjectForKey(name))")
+            
+            
             if hasValue {
                 
                 let ignore = (ignorePropertiesForCoding!).contains(name)
@@ -33,7 +37,9 @@ class Reflect: NSObject, NSCoding{
                 
                     self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
                 }
+                
             }else{
+                
                 self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
             }
         }
@@ -57,11 +63,24 @@ class Reflect: NSObject, NSCoding{
                     aCoder.encodeObject(value as? AnyObject, forKey: name)
                 }
             }else{
-                aCoder.encodeObject(value as? AnyObject, forKey: name)
+
+                if type.isArray {
+                    
+                    if type.isReflect {
+                        
+                        aCoder.encodeObject(value as? NSArray, forKey: name)
+                        
+                    }else {
+                        aCoder.encodeObject(value as? AnyObject, forKey: name)
+                    }
+
+                }else {
+                    var v = "\(value)".replacingOccurrencesOfString("Optional(", withString: "").replacingOccurrencesOfString(")", withString: "")
+                    v = v.replacingOccurrencesOfString("\"", withString: "")
+                    aCoder.encodeObject(v, forKey: name)
+                }
             }
-            
         }
-        
     }
     
     func parseOver(){}

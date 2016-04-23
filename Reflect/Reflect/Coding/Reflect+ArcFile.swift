@@ -84,15 +84,13 @@ extension Reflect{
         
         if !existed {
             
-            print("cache_reflect_path不存在")
             do {
                 try fm.createDirectoryAtPath(cache_reflect_path, withIntermediateDirectories: true, attributes: nil)
-                print("cache_reflect_path创建中")
+          
             }catch {}
             
         }else{
         
-            print("cache_reflect_path已经存在")
         }
         
         return cache_reflect_path

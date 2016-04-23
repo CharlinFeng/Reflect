@@ -38,6 +38,9 @@ let appUserDict: NSDictionary = [
     "id_card" : "511632349835898588",
     "last_login_time" : "1461379075",
     "name" : "冯成林",
+    "header_img": [
+        ["id":"18","url":"/Public/yyxc/student/2016/04/5719f90878a11.png","thumb":"/Public/yyxc/student/2016/04/thumb_300X300_5719f90878a11.png"]
+    ],
     "now_stage" :     [
         "id" : "2",
         "name" : "now_stage",
@@ -93,8 +96,11 @@ class AppUserModel: Reflect {
     class func parse(){
     
         let au = AppUserModel.parse(dict: appUserDict)
-        print(au)
-    
+        AppUserModel.save(obj: au, name: "AppUserModel", duration: 1000)
+        let res = AppUserModel.read(name: "AppUserModel")
+        let u = res.1 as? AppUserModel
+        
+        print("au_arc:\(res.1)")
     }
 }
 

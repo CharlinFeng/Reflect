@@ -36,7 +36,8 @@ class Book1: Reflect {
         if res.0 {
             
             print("有缓存")
-
+            
+            print(book1)
             
         }else {
             
@@ -50,7 +51,7 @@ class Book1: Reflect {
             
             
             
-            Book1.save(obj: book1, name: "book1", duration: 10)
+            Book1.save(obj: book1, name: "book1", duration: 100)
         }
         
     }

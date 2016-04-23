@@ -16,9 +16,6 @@ class Book3: Reflect{
     
     var price: NSNumber!
     
-
-    
-    
     class func action(){
         
         let b1 = Book3()
