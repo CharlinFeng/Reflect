@@ -29,7 +29,7 @@ class ViewController: UIViewController {
 //        Student3.parse()
 //        Student4.parse()
 //        Student5.parse()
-        Student6.parse()
+//        Student6.parse()
 //        Student7.parse()
 //        Author.parse()
 //        
@@ -45,6 +45,8 @@ class ViewController: UIViewController {
 //        UserModel.parse()
         
 //        AppUserModel.parse()
+        
+        CoachModel.parse()
     }
 
 

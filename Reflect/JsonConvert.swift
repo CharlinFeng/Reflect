@@ -8,23 +8,29 @@
 
 import Foundation
 
-let jsonStr = "{'name':'张三','age':32}"
+let jsonStr = "{\"name\":null,\"age\":32}"
+
 
 class CoachModel: Reflect {
     
     var name: String?
     var age: NSNumber?
 
-    static func parse(json: String?){
+    static func parse(){
     
-        let d = json?.dataUsingEncoding(NSUTF8StringEncoding)
+        let d = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
         
         do{
-            try?{
-                let dict = NSJSONSerialization.JSONObjectWithData(d!, options: NSJSONReadingOptions.AllowFragments)
-            }
+//            id obj=[NSJSONSerialization JSONObjectWithData:correctStringData options:NSJSONReadingAllowFragments error:&error];
+            let dict = try? NSJSONSerialization.JSONObjectWithData(d!, options: NSJSONReadingOptions.AllowFragments)
+            let m = CoachModel.parse(dict: dict as! NSDictionary)
+            
+            print(m)
+            
         } catch {
-        
+            
+            print("")
+            
         }
         
         
