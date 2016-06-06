@@ -60,10 +60,20 @@ extension Reflect{
                 if !type.isArray {
                     
                     if !type.isReflect {
-                        
+                        print("==========\(type.realType),\(type.isOptional)")
                         if type.typeClass == Bool.self { //bool
                             
                             model.setValue(dict[key]?.boolValue, forKeyPath: name)
+                            
+                        }else if type.isOptional && type.realType == ReflectType.RealType.String{
+                            
+                            let v = dict[key]
+                            
+                            if v != nil {
+                            
+                                let str_temp = "\(v!)"
+                                model.setValue(str_temp, forKeyPath: name)
+                            }
                             
                         }else{
                             model.setValue(dict[key], forKeyPath: name)

@@ -29,7 +29,7 @@ class ViewController: UIViewController {
 //        Student3.parse()
 //        Student4.parse()
 //        Student5.parse()
-//        Student6.parse()
+        Student6.parse()
 //        Student7.parse()
 //        Author.parse()
 //        
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
 //        Book3.action()
 //        UserModel.parse()
         
-        AppUserModel.parse()
+//        AppUserModel.parse()
     }
 
 
