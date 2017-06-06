@@ -37,7 +37,7 @@ extension Reflect{
                     do {
                         try fm.removeItem(atPath: path)
                     }catch {
-                        print("删除失败")
+                        
                     }
                 }
             }

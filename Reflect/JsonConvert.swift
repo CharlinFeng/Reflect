@@ -25,11 +25,9 @@ class CoachModel: Reflect {
             let dict = try? JSONSerialization.jsonObject(with: d!, options: JSONSerialization.ReadingOptions.allowFragments)
             let m = CoachModel.parse(dict: dict as! NSDictionary)
             
-            print(m)
             
         } catch {
             
-            print("")
             
         }
         

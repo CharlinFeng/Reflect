@@ -199,13 +199,11 @@ extension Reflect{
             if T.self is Int.Type {
                 element = Int(Float(v)!) as! T
             }
-            else if T.self is Float {element = v.floatValue as! T; print("======Float")}
-            else if T.self is Double.Type {element = v.doubleValue as! T; print("======Double")}
-            else if T.self is NSNumber.Type {element = NSNumber(value: v.doubleValue!) as! T; print("======NSNumber")}
-            else if T.self is String.Type {element = v as! T; print("======String")}
-            else{element = value as! T; print("======else")}
-
-            print("========:\(T.self),\(v),\(element.self),\(element)")
+            else if T.self is Float {element = v.floatValue as! T}
+            else if T.self is Double.Type {element = v.doubleValue as! T}
+            else if T.self is NSNumber.Type {element = NSNumber(value: v.doubleValue!) as! T}
+            else if T.self is String.Type {element = v as! T}
+            else{element = value as! T}
             
             intArrM.append(element)
         }

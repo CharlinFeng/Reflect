@@ -155,10 +155,10 @@ extension ReflectType{
         var clsString = arrayString?.replacingOccurrencesOfString(target: "Array<", withString: "").replacingOccurrencesOfString(target: "Optional<", withString: "").replacingOccurrencesOfString(target: ">", withString: "") ?? ""
         
         clsString = arrayString?.replacingOccurrencesOfString(target: "Array<", withString: "") ?? ""
-        print("1==========\(clsString)")
+
         clsString = clsString.replacingOccurrencesOfString(target: "Optional", withString: "")
         clsString = clsString.replacingOccurrencesOfString(target: "ImplicitlyUnwrapped", withString: "")
-        print("2==========\(clsString)")
+  
         
         var cls: AnyClass? = ClassFromString(str: clsString)
         

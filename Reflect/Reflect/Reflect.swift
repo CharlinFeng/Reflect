@@ -53,8 +53,6 @@ class Reflect: NSObject, NSCoding{
         
         self.properties { (name, type, value) -> Void in
             
-            print("encodeWithCoder:\(name),\(type),\(value),\(self)")
-            
             let hasValue = ignorePropertiesForCoding != nil
             
             if hasValue {
