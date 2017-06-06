@@ -14,7 +14,7 @@ extension Reflect{
     static var DurationKey: String {return "Duration"}
     
     
-    class func save(obj obj: AnyObject! , name: String, duration: TimeInterval) -> String{
+    class func save(obj: AnyObject! , name: String, duration: TimeInterval) -> String{
         
         if duration > 0 {
             
@@ -48,7 +48,7 @@ extension Reflect{
         return path
     }
     
-    class func read(name name: String) -> (Bool, AnyObject?){
+    class func read(name: String) -> (Bool, AnyObject?){
         
         let time = UserDefaults.standard.double(forKey: name)
         let duration = UserDefaults.standard.double(forKey: name + DurationKey)
@@ -63,7 +63,7 @@ extension Reflect{
         return (true,obj as AnyObject?)
     }
     
-    class func deleteReflectModel(name name: String){save(obj: nil, name: name, duration: 0)}
+    class func deleteReflectModel(name: String){save(obj: nil, name: name, duration: 0)}
     
     static func pathWithName(name: String) -> String{
  

@@ -10,16 +10,12 @@ import Foundation
 
 class Reflect: NSObject, NSCoding{
     
-    public func encode(with aCoder: NSCoder) {
-        
-    }
-
-    
     lazy var mirror: Mirror = {Mirror(reflecting: self)}()
 
     required override init(){}
     
-    required convenience init?(coder aDecoder: NSCoder) {
+    
+    public convenience required init?(coder aDecoder: NSCoder) {
 
         self.init()
         
@@ -31,8 +27,6 @@ class Reflect: NSObject, NSCoding{
             
             let hasValue = ignorePropertiesForCoding != nil
 
-            print("aDecoder:\(name),\(aDecoder.decodeObject(forKey: name))")
-            
             
             if hasValue {
                 
@@ -51,11 +45,15 @@ class Reflect: NSObject, NSCoding{
     }
     
     
-    func encodeWithCoder(aCoder: NSCoder) {
+    
+    
+    public func encode(with aCoder: NSCoder){
         
         let ignorePropertiesForCoding = self.ignoreCodingPropertiesForCoding()
         
         self.properties { (name, type, value) -> Void in
+            
+            print("encodeWithCoder:\(name),\(type),\(value),\(self)")
             
             let hasValue = ignorePropertiesForCoding != nil
             

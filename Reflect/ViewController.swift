@@ -43,9 +43,9 @@ class ViewController: UIViewController {
 //        Book2.action()
 //        Book3.action()
 //        UserModel.parse()
-//        
+//
 //        AppUserModel.parse()
-//        
+//
 //        CoachModel.parse()
     }
 
