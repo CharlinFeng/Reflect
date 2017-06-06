@@ -14,15 +14,15 @@ extension Reflect{
     static var DurationKey: String {return "Duration"}
     
     
-    class func save(obj obj: AnyObject! , name: String, duration: NSTimeInterval) -> String{
+    class func save(obj obj: AnyObject! , name: String, duration: TimeInterval) -> String{
         
         if duration > 0 {
             
-            NSUserDefaults.standardUserDefaults().setDouble(NSDate().timeIntervalSince1970, forKey: name)
-            NSUserDefaults.standardUserDefaults().setDouble(duration, forKey: name + DurationKey)
+            UserDefaults.standard.set(NSDate().timeIntervalSince1970, forKey: name)
+            UserDefaults.standard.set(duration, forKey: name + DurationKey)
         }
         
-        let path = pathWithName(name)
+        let path = pathWithName(name: name)
         
         if obj != nil {
             
@@ -30,12 +30,12 @@ extension Reflect{
             
         }else{
             
-            let fm = NSFileManager.defaultManager()
-            if fm.fileExistsAtPath(path) {
+            let fm = FileManager.default
+            if fm.fileExists(atPath: path) {
                 
-                if fm.isDeletableFileAtPath(path){
+                if fm.isDeletableFile(atPath: path){
                     do {
-                        try fm.removeItemAtPath(path)
+                        try fm.removeItem(atPath: path)
                     }catch {
                         print("删除失败")
                     }
@@ -48,19 +48,19 @@ extension Reflect{
         return path
     }
     
-    class func read(name name: String) -> (Bool, AnyObject!){
+    class func read(name name: String) -> (Bool, AnyObject?){
         
-        let time = NSUserDefaults.standardUserDefaults().doubleForKey(name)
-        let duration = NSUserDefaults.standardUserDefaults().doubleForKey(name + DurationKey)
+        let time = UserDefaults.standard.double(forKey: name)
+        let duration = UserDefaults.standard.double(forKey: name + DurationKey)
         let now = NSDate().timeIntervalSince1970
-        let path = pathWithName(name)
+        let path = pathWithName(name: name)
         
-        let obj = NSKeyedUnarchiver.unarchiveObjectWithFile(path)
+        let obj = NSKeyedUnarchiver.unarchiveObject(withFile: path)
     
-        if time > 0 && duration > 0 && time + duration < now {return (false,obj)}
-        if obj == nil {return (false,obj)}
+        if time > 0 && duration > 0 && time + duration < now {return (false,obj as AnyObject?)}
+        if obj == nil {return (false,obj as AnyObject?)}
         
-        return (true,obj)
+        return (true,obj as AnyObject?)
     }
     
     class func deleteReflectModel(name name: String){save(obj: nil, name: name, duration: 0)}
@@ -74,18 +74,18 @@ extension Reflect{
 
     static var cachesFolder: String? {
         
-        let cacheRootPath = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.CachesDirectory, NSSearchPathDomainMask.UserDomainMask, true).last
+        let cacheRootPath = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.cachesDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).last
     
         let cache_reflect_path = cacheRootPath! + "/" + "Reflect"
         
-        let fm = NSFileManager.defaultManager()
+        let fm = FileManager.default
         
-        let existed = fm.fileExistsAtPath(cache_reflect_path)
+        let existed = fm.fileExists(atPath: cache_reflect_path)
         
         if !existed {
             
             do {
-                try fm.createDirectoryAtPath(cache_reflect_path, withIntermediateDirectories: true, attributes: nil)
+                try fm.createDirectory(atPath: cache_reflect_path, withIntermediateDirectories: true, attributes: nil)
           
             }catch {}
             

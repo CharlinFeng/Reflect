@@ -26,14 +26,14 @@ class Student7: Reflect {
     
     
     /**  bool  */
-    override func setValue(value: AnyObject?, forUndefinedKey key: String) {
+    override func setValue(_ value: Any?, forUndefinedKey key: String) {
 
         self.age2 = value as! NSNumber != 0
     }
     
     class func parse(){
         
-        let stus = Student7.parses(arr: Student7DictArr)
+        let stus = Student7.parses(arr: Student7DictArr as NSArray)
     
         for stu in stus {
             print(stu)

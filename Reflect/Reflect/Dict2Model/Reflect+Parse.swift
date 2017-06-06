@@ -13,7 +13,7 @@ extension Reflect{
     
     class func parsePlist(name: String) -> Self?{
     
-        let path = NSBundle.mainBundle().pathForResource(name+".plist", ofType: nil)
+        let path = Bundle.main.path(forResource: name+".plist", ofType: nil)
         
         if path == nil {return nil}
         
@@ -28,7 +28,7 @@ extension Reflect{
         
         var models: [Reflect] = []
         
-        for (_ , dict) in arr.enumerate(){
+        for (_ , dict) in arr.enumerated(){
             
             let model = self.parse(dict: dict as! NSDictionary)
             
@@ -59,11 +59,13 @@ extension Reflect{
                 
                 if !type.isArray {
                     
+                    
+                    
                     if !type.isReflect {
-                        print("==========\(type.realType),\(type.isOptional)")
+                      
                         if type.typeClass == Bool.self { //bool
                             
-                            model.setValue(dict[key]?.boolValue, forKeyPath: name)
+                            model.setValue((dict[key] as AnyObject).boolValue, forKeyPath: name)
                             
                         }else if type.isOptional && type.realType == ReflectType.RealType.String{
                             
@@ -89,7 +91,7 @@ extension Reflect{
                         
                         if dictValue != nil { //字典中有模型
                             
-                            let modelValue = model.valueForKeyPath(key)
+                            let modelValue = model.value(forKeyPath: key)
                             
                             if modelValue != nil { //子模型已经初始化
                                 
@@ -98,12 +100,11 @@ extension Reflect{
                             }else{ //子模型没有初始化
                                 
                                 //先主动初始化
-                                let cls = ClassFromString(type.typeName)
+                                var tn = type.typeName ?? ""
+                                var cls = ClassFromString(str: tn)
                                 model.setValue((cls as! Reflect.Type).parse(dict: dict[key] as! NSDictionary), forKeyPath: name)
                             }
                         }
-                        
-                        
                         
                     }
                     
@@ -111,33 +112,56 @@ extension Reflect{
                     
                     if let res = type.isAggregate(){
                         
-                        var arrAggregate = []
         
                         if res is Int.Type {
-                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Int, ins: 0)
+                            
+                            var arrAggregate: [Int] = []
+                            arrAggregate = parseAggregateArray(arrDict: dict[key] as! NSArray, basicType: ReflectType.BasicType.Int, ins: 0)
+                            model.setValue(arrAggregate, forKeyPath: name)
+                            
                         }else if res is Float.Type {
-                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Float, ins: 0.0)
+                            
+                            var arrAggregate: [Float] = []
+                            arrAggregate = parseAggregateArray(arrDict: dict[key] as! NSArray, basicType: ReflectType.BasicType.Float, ins: 0.0)
+                            model.setValue(arrAggregate, forKeyPath: name)
+                            
                         }else if res is Double.Type {
-                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.Double, ins: 0.0)
+                            
+                            var arrAggregate: [Double] = []
+                            arrAggregate = parseAggregateArray(arrDict: dict[key] as! NSArray, basicType: ReflectType.BasicType.Double, ins: 0.0)
+                            model.setValue(arrAggregate, forKeyPath: name)
+                            
                         }else if res is String.Type {
-                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.String, ins: "")
+                            
+                            var arrAggregate: [String] = []
+                            arrAggregate = parseAggregateArray(arrDict: dict[key] as! NSArray, basicType: ReflectType.BasicType.String, ins: "")
+                            model.setValue(arrAggregate, forKeyPath: name)
+                            
                         }else if res is NSNumber.Type {
-                            arrAggregate = parseAggregateArray(dict[key] as! NSArray, basicType: ReflectType.BasicType.NSNumber, ins: NSNumber())
+                            
+                            var arrAggregate: [NSNumber] = []
+                            arrAggregate = parseAggregateArray(arrDict: dict[key] as! NSArray, basicType: ReflectType.BasicType.NSNumber, ins: NSNumber())
+                            model.setValue(arrAggregate, forKeyPath: name)
+                            
                         }else{
+                            
+                            var arrAggregate: [AnyObject] = []
                             arrAggregate = dict[key] as! [AnyObject]
+                            model.setValue(arrAggregate, forKeyPath: name)
+                            
                         }
                         
-                        model.setValue(arrAggregate, forKeyPath: name)
+                        
                         
                     }else{
                         
-                        let elementModelType =  ReflectType.makeClass(type) as! Reflect.Type
+                        let elementModelType =  ReflectType.makeClass(type: type) as! Reflect.Type
                         
                         let dictKeyArr = dict[key] as! NSArray
                         
                         var arrM: [Reflect] = []
                         
-                        for (_, value) in dictKeyArr.enumerate() {
+                        for (_, value) in dictKeyArr.enumerated() {
                             
                             let elementModel = elementModelType.parse(dict: value as! NSDictionary)
                             
@@ -163,22 +187,25 @@ extension Reflect{
         
         if arrDict.count == 0 {return intArrM}
         
-        for (_, value) in arrDict.enumerate() {
+        for (_, value) in arrDict.enumerated() {
             
             var element: T = ins
             
             let v = "\(value)"
             
-
+            
+            
             
             if T.self is Int.Type {
                 element = Int(Float(v)!) as! T
             }
-            else if T.self is Float.Type {element = v.floatValue as! T}
-            else if T.self is Double.Type {element = v.doubleValue as! T}
-            else if T.self is NSNumber.Type {element = NSNumber(double: v.doubleValue!) as! T}
-            else{element = value as! T}
+            else if T.self is Float {element = v.floatValue as! T; print("======Float")}
+            else if T.self is Double.Type {element = v.doubleValue as! T; print("======Double")}
+            else if T.self is NSNumber.Type {element = NSNumber(value: v.doubleValue!) as! T; print("======NSNumber")}
+            else if T.self is String.Type {element = v as! T; print("======String")}
+            else{element = value as! T; print("======else")}
 
+            print("========:\(T.self),\(v),\(element.self),\(element)")
             
             intArrM.append(element)
         }

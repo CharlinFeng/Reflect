@@ -8,7 +8,7 @@
 
 import Foundation
 
-let Student3Dict = ["name": "jack", "age": 28, "pens": [["length":5.5],["length":6.5],["length":7.5]],"score": ["88",66,99.5]]
+let Student3Dict: NSDictionary = ["name": "jack", "age": 28, "pens": [["length":5.5],["length":6.5],["length":7.5]],"score": ["88",66,99.5]]
 
 
 /**  主要完成数组的转换  */

@@ -14,7 +14,7 @@ extension Reflect {
     
     override var description: String {
     
-        let pointAddr = NSString(format: "%p",unsafeBitCast(self, Int.self)) as String
+        let pointAddr = NSString(format: "%p",unsafeBitCast(self, to: Int.self)) as String
         
         var printStr = self.classNameString + " <\(pointAddr)>: " + "\r{"
         
@@ -40,25 +40,30 @@ extension Reflect {
 
 extension String{
     
-    func contain(subStr subStr: String) -> Bool {return (self as NSString).rangeOfString(subStr).length > 0}
+    func contain(subStr subStr: String) -> Bool {return (self as NSString).range(of: subStr).length > 0}
     
     func explode (separator: Character) -> [String] {
-        return self.characters.split(isSeparator: { (element: Character) -> Bool in
+        
+        
+        return self.characters.split(whereSeparator: { (element) -> Bool in
+
             return element == separator
         }).map { String($0) }
+        
+        
     }
     
     func replacingOccurrencesOfString(target: String, withString: String) -> String{
-        return (self as NSString).stringByReplacingOccurrencesOfString(target, withString: withString)
+        return (self as NSString).replacingOccurrences(of: target, with: withString)
     }
     
     func deleteSpecialStr()->String{
     
-        return self.replacingOccurrencesOfString("Optional<", withString: "").replacingOccurrencesOfString(">", withString: "")
+        return self.replacingOccurrencesOfString(target: "Optional<", withString: "").replacingOccurrencesOfString(target: ">", withString: "")
     }
     
-    var floatValue: Float? {return NSNumberFormatter().numberFromString(self)?.floatValue}
-    var doubleValue: Double? {return NSNumberFormatter().numberFromString(self)?.doubleValue}
+    var floatValue: Float? {return NumberFormatter().number(from: self)?.floatValue}
+    var doubleValue: Double? {return NumberFormatter().number(from: self)?.doubleValue}
     
     func repeatTimes(times: Int) -> String{
         

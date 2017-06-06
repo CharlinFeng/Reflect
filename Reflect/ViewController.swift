@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
 //        Person.reflect()
-//        
+//
 //        Student1.parse()
 //        Student2.parse()
 //        Student3.parse()
@@ -32,21 +32,21 @@ class ViewController: UIViewController {
 //        Student6.parse()
 //        Student7.parse()
 //        Author.parse()
-//        
+//
 //        Person1.convert()
 //        Person2.convert()
 //        Person3.convert()
 //        Person4.convert()
-//        
-//        
+
+        
 //        Book1.action()
 //        Book2.action()
 //        Book3.action()
 //        UserModel.parse()
-        
+//        
 //        AppUserModel.parse()
-        
-        CoachModel.parse()
+//        
+//        CoachModel.parse()
     }
 
 

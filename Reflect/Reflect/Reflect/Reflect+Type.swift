@@ -28,7 +28,7 @@ class ReflectType {
     
     var realType: RealType = .None
     
-    private var propertyMirrorType: Mirror
+    var propertyMirrorType: Mirror
 
     init(propertyMirrorType: Mirror, belongType: Any.Type){
         
@@ -68,9 +68,9 @@ extension ReflectType{
 
         displayStyle = propertyMirrorType.displayStyle
         
-        if displayStyle == nil && basicTypes.contains(typeName) {displayStyle = .Struct}
+        if displayStyle == nil && basicTypes.contains(typeName) {displayStyle = .struct}
         
-        if extraTypes.contains(typeName) {displayStyle = .Struct}
+        if extraTypes.contains(typeName) {displayStyle = .struct}
         
 //        guard displayStyle != nil else {fatalError("[Charlin Feng]: DisplayStyle Must Have Value")}
     }
@@ -81,11 +81,11 @@ extension ReflectType{
 
         switch displayStyle! {
             
-            case .Struct: displayStyleDesc = "Struct"
-            case .Class: displayStyleDesc = "Class"
-            case .Optional: displayStyleDesc = "Optional"; isOptional = true;
-            case .Enum: displayStyleDesc = "Enum"
-            case .Tuple: displayStyleDesc = "Tuple"
+            case .struct: displayStyleDesc = "Struct"
+            case .class: displayStyleDesc = "Class"
+            case .optional: displayStyleDesc = "Optional"; isOptional = true;
+            case .enum: displayStyleDesc = "Enum"
+            case .tuple: displayStyleDesc = "Tuple"
             default: displayStyleDesc = "Other: Collection/Dictionary/Set"
 
         }
@@ -139,6 +139,7 @@ extension ReflectType{
         else if typeName.contain(subStr: "Double") {realType = RealType.Double}
         else if typeName.contain(subStr: "String") {realType = RealType.String}
         else if typeName.contain(subStr: "Bool") {realType = RealType.Bool}
+            else if typeName.contain(subStr: "NSNumber") {realType = RealType.Bool}
         else {realType = RealType.Class}
         
         if .Class == realType && !sdkTypes.contains(typeName) {
@@ -151,15 +152,22 @@ extension ReflectType{
         
         let arrayString = type.typeName
         
-        let clsString = arrayString.replacingOccurrencesOfString("Array<", withString: "").replacingOccurrencesOfString("Optional<", withString: "").replacingOccurrencesOfString(">", withString: "")
+//        let clsString = arrayString?.replacingOccurrencesOfString(target: "Array<", withString: "").replacingOccurrencesOfString(target: "Optional<", withString: "").replacingOccurrencesOfString(target: ">", withString: "")
         
-        var cls: AnyClass? = ClassFromString(clsString)
+        var clsString = arrayString?.replacingOccurrencesOfString(target: "Array<", withString: "") ?? ""
+        print("1==========\(clsString)")
+        clsString = clsString.replacingOccurrencesOfString(target: "Optional", withString: "")
+        clsString = clsString.replacingOccurrencesOfString(target: "ImplicitlyUnwrapped", withString: "")
+        print("2==========\(clsString)")
+        
+        var cls: AnyClass? = ClassFromString(str: clsString)
         
         if cls == nil && type.isReflect {
             
-            let nameSpaceString = "\(type.belongType).\(clsString)"
+            var nameSpaceString = "\(type.belongType ?? Any.self).\(clsString)" ?? ""
             
-            cls = ClassFromString(nameSpaceString)
+            cls = ClassFromString(str: nameSpaceString)
+            
         }
         
         return cls!

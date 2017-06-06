@@ -8,7 +8,7 @@
 
 import Foundation
 
-let UserDict = ["name": "jack", "age": "28", "img_model": ["url":"http://host.com/1.jpg"]]
+let UserDict = ["name": "jack", "age": "28", "img_model": ["url":"http://host.com/1.jpg"]] as [String : Any]
 
 class ImageModel: Reflect {
 
@@ -25,7 +25,7 @@ class UserModel: Reflect {
     
     class func parse(){
     
-        let user = UserModel.parse(dict: UserDict)
+        let user = UserModel.parse(dict: UserDict as NSDictionary)
         
         print("解析成功：\(user)")
     }

@@ -10,6 +10,11 @@ import Foundation
 
 class Reflect: NSObject, NSCoding{
     
+    public func encode(with aCoder: NSCoder) {
+        
+    }
+
+    
     lazy var mirror: Mirror = {Mirror(reflecting: self)}()
 
     required override init(){}
@@ -26,7 +31,7 @@ class Reflect: NSObject, NSCoding{
             
             let hasValue = ignorePropertiesForCoding != nil
 
-            print("aDecoder:\(name),\(aDecoder.decodeObjectForKey(name))")
+            print("aDecoder:\(name),\(aDecoder.decodeObject(forKey: name))")
             
             
             if hasValue {
@@ -35,12 +40,12 @@ class Reflect: NSObject, NSCoding{
                 
                 if !ignore {
                 
-                    self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
+                    self.setValue(aDecoder.decodeObject(forKey: name), forKeyPath: name)
                 }
                 
             }else{
                 
-                self.setValue(aDecoder.decodeObjectForKey(name), forKeyPath: name)
+                self.setValue(aDecoder.decodeObject(forKey: name), forKeyPath: name)
             }
         }
     }
@@ -60,7 +65,7 @@ class Reflect: NSObject, NSCoding{
                 
                 if !ignore {
                     
-                    aCoder.encodeObject(value as? AnyObject, forKey: name)
+                    aCoder.encode(value as? AnyObject, forKey: name)
                 }
             }else{
 
@@ -68,16 +73,16 @@ class Reflect: NSObject, NSCoding{
                     
                     if type.isReflect {
                         
-                        aCoder.encodeObject(value as? NSArray, forKey: name)
+                        aCoder.encode(value as? NSArray, forKey: name)
                         
                     }else {
-                        aCoder.encodeObject(value as? AnyObject, forKey: name)
+                        aCoder.encode(value as? AnyObject, forKey: name)
                     }
 
                 }else {
-                    var v = "\(value)".replacingOccurrencesOfString("Optional(", withString: "").replacingOccurrencesOfString(")", withString: "")
-                    v = v.replacingOccurrencesOfString("\"", withString: "")
-                    aCoder.encodeObject(v, forKey: name)
+                    var v = "\(value)".replacingOccurrencesOfString(target: "Optional(", withString: "").replacingOccurrencesOfString(target: ")", withString: "")
+                    v = v.replacingOccurrencesOfString(target: "\"", withString: "")
+                    aCoder.encode(v, forKey: name)
                 }
             }
         }

@@ -10,9 +10,9 @@ import Foundation
 
 extension Reflect{
     
-    var classNameString: String {return "\(self.dynamicType)"}
+    var classNameString: String {return "\(type(of: self))"}
     
-    func properties(property: (name: String, type: ReflectType, value: Any) -> Void){
+    func properties(property: (_ name: String, _ type: ReflectType, _ value: Any) -> Void){
 
         for p in mirror.children {
             
@@ -20,13 +20,13 @@ extension Reflect{
             
             let v = p.value
             
-            let reflectType = ReflectType(propertyMirrorType: Mirror(reflecting: v), belongType: self.dynamicType)
-                
-            property(name: propertyNameString , type: reflectType, value: v)
+            let reflectType = ReflectType(propertyMirrorType: Mirror(reflecting: v), belongType: type(of: self))
+            
+            property(propertyNameString , reflectType, v)
         }
     }
     
-    class func properties(property: (name: String, type: ReflectType, value: Any) -> Void){self.init().properties(property)}
+    class func properties(property: (_ name: String, _ type: ReflectType, _ value: Any) -> Void){self.init().properties(property: property)}
 }
 
 

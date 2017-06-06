@@ -17,7 +17,7 @@ class Author: Reflect {
     
     class func parse(){
         
-        let author = Author.parsePlist("Author")
+        let author = Author.parsePlist(name: "Author")
         print(author)
         
     }

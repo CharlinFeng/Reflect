@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import Foundation
 
-
-let Student2Dict = ["name": "jack", "age": 28, "bag": ["color": "blue", "price": 14.5]]
+let Student2Dict = ["name": "jack", "age": 28, "bag": ["color": "blue", "price": 14.5]] as [String : Any]
 
 
 /**  在test1的基础上增加自定义对象  */
@@ -28,7 +28,7 @@ class Student2: Reflect {
     
     class func parse(){
         
-        let stu2 = Student2.parse(dict: Student2Dict)
+        let stu2 = Student2.parse(dict: Student2Dict as NSDictionary)
     
         print("\(stu2)")
     }
@@ -48,7 +48,8 @@ class Bag: Reflect {
     init (color: String, price: Float){
         
         self.color = color
-        self.price = price
+        
+        self.price = NSNumber(floatLiteral: Double(price))
     }
 }
 

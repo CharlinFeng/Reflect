@@ -23,7 +23,7 @@ extension Reflect{
                 
                 }else{
                     
-                    dict[name] = "\(value)".replacingOccurrencesOfString("Optional(", withString: "").replacingOccurrencesOfString(")", withString: "").replacingOccurrencesOfString("\"", withString: "")
+                    dict[name] = "\(value)".replacingOccurrencesOfString(target: "Optional(", withString: "").replacingOccurrencesOfString(target: ")", withString: "").replacingOccurrencesOfString(target: "\"", withString: "")
                 }
                 
             }else{
@@ -52,7 +52,7 @@ extension Reflect{
                     
                 }else{
                     
-                    dict[name] = "\(value)".replacingOccurrencesOfString("Optional(", withString: "").replacingOccurrencesOfString(")", withString: "").replacingOccurrencesOfString("\"", withString: "")
+                    dict[name] = "\(value)".replacingOccurrencesOfString(target: "Optional(", withString: "").replacingOccurrencesOfString(target: ")", withString: "").replacingOccurrencesOfString(target: "\"", withString: "")
                 }
             }
             

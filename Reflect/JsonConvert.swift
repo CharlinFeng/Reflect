@@ -18,11 +18,11 @@ class CoachModel: Reflect {
 
     static func parse(){
     
-        let d = jsonStr.dataUsingEncoding(NSUTF8StringEncoding)
+        let d = jsonStr.data(using: String.Encoding.utf8)
         
         do{
 //            id obj=[NSJSONSerialization JSONObjectWithData:correctStringData options:NSJSONReadingAllowFragments error:&error];
-            let dict = try? NSJSONSerialization.JSONObjectWithData(d!, options: NSJSONReadingOptions.AllowFragments)
+            let dict = try? JSONSerialization.jsonObject(with: d!, options: JSONSerialization.ReadingOptions.allowFragments)
             let m = CoachModel.parse(dict: dict as! NSDictionary)
             
             print(m)

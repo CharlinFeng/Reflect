@@ -32,7 +32,7 @@ class Book3: Reflect{
         
         let bookArr = [b1,b2,b3]
         
-        let path =  Book3.save(obj: bookArr, name: "book3", duration: 0)
+        let path =  Book3.save(obj: bookArr as AnyObject!, name: "book3", duration: 0)
         
         print(path)
 

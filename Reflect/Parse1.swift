@@ -9,7 +9,7 @@
 import UIKit
 
 
-let Student1Dict = ["name": "jack", "age": "28", "age2": 28,"v1": 98.5, "v2": 568.32414,"isVip":"1"]
+let Student1Dict: NSDictionary = ["name": "jack", "age": "28", "age2": 28,"v1": 98.5, "v2": 568.32414,"isVip":"1"]
 
 /**  基本测试: 最常见类型的转换  */
 class Student1: Reflect {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-let Student4Dict = ["id":1, "name": "jack", "age": 26,"func": "zoom"]
+let Student4Dict = ["id":1, "name": "jack", "age": 26,"func": "zoom"] as [String : Any]
 
 /**  主要测试以下功能  */
 // 模型中有多余的key
@@ -42,7 +42,7 @@ class Student4: Reflect {
     
     class func parse(){
         
-        let stu4 = Student4.parse(dict: Student4Dict)
+        let stu4 = Student4.parse(dict: Student4Dict as NSDictionary)
         print(stu4)
     }
     
