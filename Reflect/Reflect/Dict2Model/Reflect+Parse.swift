@@ -78,7 +78,18 @@ extension Reflect{
                             }
                             
                         }else{
-                            model.setValue(dict[key], forKeyPath: name)
+                            
+                            var dictValue = dict[key]
+                            
+                            if let tmp = dictValue {
+                                
+                                if tmp.isEqual(NSNull.init()) {
+                                    
+                                    dictValue = nil
+                                }
+                            }
+                            
+                            model.setValue(dictValue, forKeyPath: name)
                         }
                         
                         
@@ -87,7 +98,16 @@ extension Reflect{
                         
                         //这里是模型
                         //首选判断字典中是否有值
-                        let dictValue = dict[key]
+                        
+                        var dictValue = dict[key]
+                        
+                        if let tmp = dictValue {
+                            
+                            if tmp.isEqual(NSNull.init()) {
+                                
+                                dictValue = nil
+                            }
+                        }
                         
                         if dictValue != nil { //字典中有模型
                             
